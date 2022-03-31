@@ -1,8 +1,40 @@
 {% extends 'base.html' %}
 
 {%block head%}
-    <h1>Eduart</h1>
+
 {% endblock %}
 
+{%block option_bar%}
+<!--creating an option bar to access easily the different,
+    categories or services of the webpage-->
+    <header>
+        <div class="container">
+            <!--container(name) division helps to separate our work in smaller divisions, 
+                 so it will be easier to implement or manipulate with CSS styles-->
+            <div class="nav-list">
+                <!--nav-list(name) division helps to separate our work in smaller divisions, 
+                    so it will be easier to implement or manipulate with CSS styles 
+                    
+                    It contains four list items to which we are going to associate a link to redirect us.  -->
+                <li> 
+                    <a href="#" class="nav-link">The Farm</a>
+                </li>
+                <li> 
+                    <a href="#" class="nav-link">Services</a>
+                </li>
+                <li> 
+                    <a href="#" class="nav-link">Type of animals</a>
+                </li>
+                <li> 
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+            </div>
+        </div>
+    </header>
+{% endblock %}
 {%block body%}
+
+
+
+
 {% endblock %}
