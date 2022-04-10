@@ -1,40 +1,88 @@
 {% extends 'base.html' %}
 
 {%block head%}
+    {%block option_bar%}
+        <!--creating an option bar to access easily the different,
+            categories or services of the webpage-->
+            <header>
+                <div class="container">
+                    <!--container(name) division helps to separate our work in smaller divisions, 
+                        so it will be easier to implement or manipulate with CSS styles-->
+                    <div class="nav-list">
+                        <!--nav-list(name) division helps to separate our work in smaller divisions, 
+                            so it will be easier to implement or manipulate with CSS styles 
+                            
+                            It contains four list items to which we are going to associate a link to redirect us.  -->
+                        <li> 
+                            <a href="#" class="nav-link" id="theFarm">The Farm</a>
+                        </li>
+                        <li> 
+                            <a href="#" class="nav-link" id="services">Services</a>
+                        </li>
+                        <li> 
+                            <a href="#" class="nav-link" id="types">Animal types </a>
+                        </li>
+                        <li> 
+                            <a href="#" class="nav-link" id="contact">Contact</a>
+                        </li>
 
+                        <div class="language">
+                            <li>
+                                <a onclick="changeLanguage()" class="nav-link" id="languageSwitcher">Fr</a>
+                            </li>
+                        </div>
+                    </div>
+                </div>
+
+            </header>
+        {% endblock %}
 {% endblock %}
 
-{%block option_bar%}
-<!--creating an option bar to access easily the different,
-    categories or services of the webpage-->
-    <header>
-        <div class="container">
-            <!--container(name) division helps to separate our work in smaller divisions, 
-                 so it will be easier to implement or manipulate with CSS styles-->
-            <div class="nav-list">
-                <!--nav-list(name) division helps to separate our work in smaller divisions, 
-                    so it will be easier to implement or manipulate with CSS styles 
-                    
-                    It contains four list items to which we are going to associate a link to redirect us.  -->
-                <li> 
-                    <a href="#" class="nav-link">The Farm</a>
-                </li>
-                <li> 
-                    <a href="#" class="nav-link">Services</a>
-                </li>
-                <li> 
-                    <a href="#" class="nav-link">Type of animals</a>
-                </li>
-                <li> 
-                    <a href="#" class="nav-link">Contact</a>
-                </li>
-            </div>
-        </div>
-    </header>
-{% endblock %}
+
 {%block body%}
+    {%block farmblock%}
+    <div class="thefarm-block">
+        <img src="static\images\home-image.jpg" class="farm-image">
+        <p class="about-the-farm">
+            The (Name) to be continued index.html l:47
+        </p>
+    </div>
+    {%endblock%}
+    {%block graphics%}
 
-
-
-
+    
+    {%endblock%}
+  <script>
+    // Create a function to change
+    // the hash value of the page
+    
+    function changeLanguage() {
+      location.hash = languageSwitcher.textContent;
+      location.reload();
+    }
+  
+    // Define the language reload anchors
+    var language = {
+      fr: {
+        farm: "La Ferme",service:"Services",type:"Types d' animaux",lang:"En"
+      }
+    };
+  
+    // Check if a hash value exists in the URL
+    if (window.location.hash) {
+  
+      // Set the content of the webpage 
+      // depending on the hash value
+      if (window.location.hash == "#Fr") {
+          theFarm.textContent =
+          language.fr.farm;
+          services.textContent =
+          language.fr.service;
+          types.textContent =
+          language.fr.type;
+          languageSwitcher.textContent =
+          language.fr.lang;
+      }
+    }
+  </script>
 {% endblock %}

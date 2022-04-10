@@ -43,5 +43,5 @@ follow it with
 
     set FLASK_APP=farm
     set FLASK_ENV=development
-    run flask
+    flask run
 
