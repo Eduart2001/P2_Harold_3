@@ -51,3 +51,7 @@ def close_db(error):
 @app.route('/')
 def index():
     return render_template("index.html")
+
+@app.route('/',methods=['POST','GET'])
+def graphics():
+    pass

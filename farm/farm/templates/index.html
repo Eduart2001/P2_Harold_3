@@ -23,6 +23,9 @@
                             <a href="#" class="nav-link" id="types">Animal types </a>
                         </li>
                         <li> 
+                            <a href="#" class="nav-link" id="graphics">Graphics</a>
+                        </li>
+                        <li> 
                             <a href="#" class="nav-link" id="contact">Contact</a>
                         </li>
 
@@ -41,17 +44,28 @@
 
 {%block body%}
     {%block farmblock%}
-    <div class="thefarm-block">
-        <img src="static\images\home-image.jpg" class="farm-image">
-        <p class="about-the-farm">
-            The (Name) to be continued index.html l:47
-        </p>
-    </div>
+        <div class="thefarm-block">
+            <img src="static\images\home-image.jpg" class="farm-image">
+            <p class="about-the-farm">
+                The (Name) to be continued index.html l:47
+            </p>
+        </div>
     {%endblock%}
-    {%block graphics%}
-
     
+    {%block graphics%}
+        <div class="graphics-selector">
+            <select name="family" id="family-select">
+                <option value="">--Please choose an option--</option>
+            </select>
+        </div>
+        <div class="action">
+            <form action="" method="POST">
+                <input type="submit" value ="Show">
+            </form>
+            </div>
     {%endblock%}
+
+
   <script>
     // Create a function to change
     // the hash value of the page
@@ -64,7 +78,7 @@
     // Define the language reload anchors
     var language = {
       fr: {
-        farm: "La Ferme",service:"Services",type:"Types d' animaux",lang:"En"
+        farm: "La Ferme",service:"Services",type:"Types d' animaux",graphic:"Graphiques" ,lang:"En"
       }
     };
   
@@ -80,6 +94,8 @@
           language.fr.service;
           types.textContent =
           language.fr.type;
+          graphics.textContent =
+          language.fr.graphic;
           languageSwitcher.textContent =
           language.fr.lang;
       }
