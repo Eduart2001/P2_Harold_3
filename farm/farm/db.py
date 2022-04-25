@@ -75,9 +75,7 @@ def get_from_db(name,table):
     l=[]
     try:
         db=connect_db()
-        print(db)
         cursor=db.cursor()
-        print(cursor)
         for i in cursor.execute(f"SELECT {name}  from {table}"):
             l.append(i[0])
         l.sort()
