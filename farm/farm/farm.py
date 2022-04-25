@@ -1,7 +1,7 @@
 import os
 import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort,render_template, flash
-from farm import db as database
+from . import db as database
 
 
 app=database.get_App()
