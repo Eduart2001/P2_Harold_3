@@ -56,13 +56,33 @@
         <div class="graphics-selector">
             <select name="family" id="family-select">
                 <option value="">--Please choose an option--</option>
+                {% for famille in familles%}
+                    <option value="">{{famille}}</option>
+                {%endfor%}
             </select>
         </div>
         <div class="action">
             <form action="" method="POST">
                 <input type="submit" value ="Show">
             </form>
-            </div>
+        </div>
+        <canvas id="graphique" width="200px" height="200px"></canvas>
+      <script>
+            // l'identifiant est celui du canevas
+            var ctx = document.getElementById('graphique').getContext('2d');
+            // création du graphique
+            var myChart = new Chart(ctx, {
+            type: 'bar',   // le type du graphique
+            data: {        // les données
+                labels: ['Jean', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique'],
+                datasets: [{
+                            label: 'votes',
+                            data: [12, 19, 3, 5, 2, 3]
+                        }]
+                }
+                }
+            );
+      </script>
     {%endblock%}
 
 
