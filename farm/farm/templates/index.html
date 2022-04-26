@@ -54,6 +54,19 @@
     
     {%block graphics%}
         <div class="graphics-selector">
+            <select name="graph-to-display" id="graph-select">
+                <option value="">--Please choose an option--</option>
+                    <option value="">Graph1</option>
+                    <option value="">Graph2</option>
+                    <option value="">Graph3</option>
+
+            </select>
+            <select name="month" id="family-select">
+                <option value="">--Please choose an option--</option>
+                {% for famille in familles%}
+                    <option value="">{{famille}}</option>
+                {%endfor%}
+            </select>
             <select name="family" id="family-select">
                 <option value="">--Please choose an option--</option>
                 {% for famille in familles%}
