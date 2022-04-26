@@ -54,26 +54,26 @@
     
     {%block graphics%}
         <div class="graphics-selector">
-            <select name="graph-to-display" id="graph-select">
-                <option value="">--Please choose an option--</option>
+            <select class="left-select select" name="graph-to-display" id="graph-select">
+                <option value="">Choose a graph to show</option>
                     <option value="0">Graph1</option>
                     <option value="1">Graph2</option>
                     <option value="2">Graph3</option>
             </select>
-            <select name="month" id="family-select">
-                <option value="">--Please choose an option--</option>
+            <select class="center-select select" name="month" id="family-select">
+                <option value="">Select a period of time</option>
                 {% for famille in familles%}
                     <option value="">{{famille}}</option>
                 {%endfor%}
             </select>
-            <select name="family" id="family-select">
-                <option value="">--Please choose an option--</option>
+            <select class="right-select select" name="family" id="family-select">
+                <option value="">Choose a family</option>
                 {% for famille in familles%}
                     <option value="">{{famille}}</option>
                 {%endfor%}
             </select>
         </div>
-        <div class="center">
+        <div class="center-button">
             <button class="button button1" onClick="graphic_creation(document.getElementById('graph-select').value)">Show</button><!--Bouton pour montrer le graphique-->
           </div>
         <!--<p id="demo"></p>-->

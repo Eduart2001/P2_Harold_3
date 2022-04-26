@@ -63,18 +63,43 @@ header{
     background-color: white; 
     color: black; 
     border: 2px solid #4CAF50;
+    border-radius: 8px;
 }
 .button1:hover {
     background-color: #4CAF50;
     color: white;
 }
-.button1 {
-    border-radius: 8px;
+.center-button{
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
-.center {
+.center-select{
     margin: 0;
     position: absolute;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
   }
+.left-select{
+    margin: 0;
+    position: absolute;
+    left: 36.9%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.right-select{
+    margin: 0;
+    position: absolute;
+    left: 61.5%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.select{
+    border-radius: 8px; 
+    padding: 10px; 
+    background-color:paleturquoise; 
+    border:none;
+}
