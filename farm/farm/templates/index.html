@@ -47,7 +47,7 @@
         <div class="thefarm-block">
             <img src="static\images\home-image.jpg" class="farm-image">
             <p class="about-the-farm">
-                The (Name) to be continued index.html l:47
+                The (Name) to be continued index.html l:47 
             </p>
         </div>
     {%endblock%}
@@ -84,7 +84,14 @@
   <script>
     // Create a function to change
     // the hash value of the page
-
+    var names= "{{keys}}"
+    var values = "{{values}}"
+    const myArray_names = names.replace("dict_keys([","").replace("])","").split(",").reverse()
+    const myArray = values.replace("dict_values([","").replace("])","").split(",").reverse()
+    console.log(myArray);
+    console.log(values);
+    console.log(typeof values);
+    console.log(typeof values);
     function graphic_creation(graph_type){
         if(graph_type==0){
             // l'identifiant est celui du canevas
@@ -93,10 +100,10 @@
             var myChart = new Chart(ctx, {
             type: 'bar',   // le type du graphique
             data: {        // les données
-                labels: ['Eduart', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique'],
+                labels: myArray_names,
                 datasets: [{
                             label: 'votes',
-                            data: [12, 19, 3, 5, 2, 3],
+                            data:myArray,
                             backgroundColor: [ //couleur du fond des batonets
                             'rgba(255, 99, 132, 0.2)',//red (red, green, blue, transparency)
                             'rgba(54, 162, 235, 0.2)',

@@ -8,7 +8,10 @@ app=database.get_App()
 
 @app.route('/')
 def index():
-    return render_template("index.html",familles=database.get_from_db("nom","familles"))
+    keys=database.graph0().keys()
+    values=database.graph0().values()
+    print(keys,values)
+    return render_template("index.html",familles=database.get_from_db("nom","familles"),keys=keys,values=values)
 
 @app.route('/',methods=['POST','GET'])
 def graphics():
