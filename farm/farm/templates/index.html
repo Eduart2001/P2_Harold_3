@@ -56,10 +56,9 @@
         <div class="graphics-selector">
             <select name="graph-to-display" id="graph-select">
                 <option value="">--Please choose an option--</option>
-                    <option value="">Graph1</option>
-                    <option value="">Graph2</option>
-                    <option value="">Graph3</option>
-
+                    <option value="0">Graph1</option>
+                    <option value="1">Graph2</option>
+                    <option value="2">Graph3</option>
             </select>
             <select name="month" id="family-select">
                 <option value="">--Please choose an option--</option>
@@ -74,13 +73,18 @@
                 {%endfor%}
             </select>
         </div>
-        <div class="action">
-            <form action="" method="POST">
-                <input type="submit" value ="Show">
-            </form>
-        </div>
-        <canvas id="graphique" width="25px" height="10px"></canvas>
-      <script>
+        <button class="button button1" onClick="graphic_creation(document.getElementById('graph-select').value)">Show</button><!--Bouton pour montrer le graphique-->
+        <!--<p id="demo"></p>-->
+    <canvas id="graphique" width="25px" height="10px"></canvas>
+    {%endblock%}
+
+
+  <script>
+    // Create a function to change
+    // the hash value of the page
+
+    function graphic_creation(graph_type){
+        if(graph_type==0){
             // l'identifiant est celui du canevas
             var ctx = document.getElementById('graphique').getContext('2d');
             // création du graphique
@@ -112,13 +116,75 @@
                 }
                 }
             );
-      </script>
-    {%endblock%}
+            }
+        if(graph_type==1){
+                        // l'identifiant est celui du canevas
+                        var ctx = document.getElementById('graphique').getContext('2d');
+            // création du graphique
+            var myChart = new Chart(ctx, {
+            type: 'bar',   // le type du graphique
+            data: {        // les données
+                labels: ['Isai', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique'],
+                datasets: [{
+                            label: 'votes',
+                            data: [12, 19, 3, 5, 2, 3],
+                            backgroundColor: [ //couleur du fond des batonets
+                            'rgba(255, 99, 132, 0.2)',//red (red, green, blue, transparency)
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)', //les bords des batonets
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1, //épaiseur des bords
+                        }]
+                }
+                }
+            );
+        }
 
-
-  <script>
-    // Create a function to change
-    // the hash value of the page
+        if(graph_type==2){
+                                    // l'identifiant est celui du canevas
+                                    var ctx = document.getElementById('graphique').getContext('2d');
+            // création du graphique
+            var myChart = new Chart(ctx, {
+            type: 'bar',   // le type du graphique
+            data: {        // les données
+                labels: ['Alex', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique'],
+                datasets: [{
+                            label: 'votes',
+                            data: [12, 19, 3, 5, 2, 3],
+                            backgroundColor: [ //couleur du fond des batonets
+                            'rgba(255, 99, 132, 0.2)',//red (red, green, blue, transparency)
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)', //les bords des batonets
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1, //épaiseur des bords
+                        }]
+                }
+                }
+            );
+        }
+    }
     
     function changeLanguage() {
       location.hash = languageSwitcher.textContent;
