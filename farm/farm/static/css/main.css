@@ -59,6 +59,7 @@ header{
     cursor: pointer;
 }
 .button1 {
+    text-align: center;
     background-color: white; 
     color: black; 
     border: 2px solid #4CAF50;
@@ -67,7 +68,13 @@ header{
     background-color: #4CAF50;
     color: white;
 }
-
 .button1 {
     border-radius: 8px;
 }
+.center {
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
