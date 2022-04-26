@@ -129,17 +129,76 @@ def get_from_db(name,table):
         return l
     except:
         raise ValueError()
+def get_min_year():
+    try:
+        db=connect_db()
+        min_year=9999
+        cursor=db.cursor()
+        for i in cursor.execute("SELECT date from velages"):
+            k=time.strptime(i[0], "%d/%m/%Y")
+            if k[0]<min_year:
+                min_year=k[0]
+        return int(min_year)
+    except:
+        raise ValueError
     
-def graph1(startDate,endDate,famille=None):
-    """graph1
+def get_max_year():
+    try:
+        db=connect_db()
+        max_year=0
+        cursor=db.cursor()
+        for i in cursor.execute("SELECT date from velages"):
+            k=time.strptime(i[0], "%d/%m/%Y")
+            if k[0]>max_year:
+                max_year=k[0]
+        return int(max_year)
+    except:
+        raise ValueError
 
-    Args:
-        startDate (_type_): _description_
-        endDate (_type_): _description_
-        famille (_type_, optional): _description_. Defaults to None.
+
+def graph0():
+    """graph0, is a function to show data about the flow of birth through decades.
+       it uses 2 functions to get the max and min year in the db.
+       than creates a dictionnary of decades.
+       
+    Raises:
+        ValueError: **
 
     Returns:
-        _type_: _description_
+        dictionnary: dictionnary of born calvings through decades
+    """
+    try:
+        d={}
+        db=connect_db()
+        cursor=db.cursor()
+        min=(get_min_year()//10)*10-10
+        max=((get_max_year()//10)*10)
+        
+        for i in range(max,min,-10):
+            d[i]=0
+            
+        for i in cursor.execute("SELECT date from velages"):
+            temp=time.strptime(i[0], "%d/%m/%Y")
+            for j in d.keys():
+                
+                if temp>=time.strptime("01/01/"+str(j),"%d/%m/%Y"):
+                    d[j]=d[j]+1
+                    break
+        return d
+    except:
+        raise ValueError()
+
+def graph1(startDate,endDate,famille=None):
+    """graph1 function helps to extract necessary data, it shows the number of born calvings through one specified periode
+       the search could be specified to a single family, if none it will show all
+
+    Args:
+        startDate str: the date that the periode search starts
+        endDate str: the date that the periode search ends
+        famille str: name of calvings family . Defaults to None.
+
+    Returns:
+        dictionnary: where the key is the date and the value is the number of clavings born on that day
     """
     startDate=time.strptime(startDate, "%d/%m/%Y")
     endDate=time.strptime(endDate, "%d/%m/%Y")
@@ -181,8 +240,21 @@ def graph1(startDate,endDate,famille=None):
 #print(graph1("03/10/2000","19/11/2010","Bleuet"))#28
 
 def graph2(year,month=None,famille=None):
-    d={}
+    """graph2 function helps to extract necessary data, it shows the number of born calvings on a full moon and
+       the number of born calvings outside the full moon, through one specified periode
+       the search could be specified to a single family, if none it will show all
+       if month == None : it means that we will look through the year else: through the month of that year
 
+    Args:
+        year int: the year to search for the full moon
+        month int: the month to search for the full moon. Defaults to None.
+        famille str: name of calvings family . Defaults to None.
+
+    Returns:
+        list: with 2 tuples the 1st one contains the number of the calvings born on the full moon, and the text 'full moon' the 
+              2nd contains the calvings born outside the full moon, and the text 'other'
+    """
+    d={}
     if month!=None:
         k=get_full_moon_in_month(year,month)
     else:
@@ -212,11 +284,11 @@ def graph2(year,month=None,famille=None):
                     other_day+=d[i]
         return [(full_moon,"full"),(other_day,"other")]
     except:
-        return d
+        raise ValueError
     
     
     
-print(graph2(2000))
+#print(graph2(2000))
 #print(graph1("03/10/2000","19/11/2010"))
 #print(graph1("03/10/2000","19/11/2010","Bleuet"))#28
 #print(get_full_moon_in_month(2022,1))
