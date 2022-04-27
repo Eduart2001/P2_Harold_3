@@ -54,19 +54,19 @@
     
     {%block charts%}
         <div class="charts-selector">
-            <select class="left-select select" name="graph-to-display" id="graph-select">
+            <select class="select" name="graph-to-display" id="graph-select">
                 <option id="select1" value="">Choose a graph to show</option>
                     <option value="0">Graph1</option>
                     <option value="1">Graph2</option>
                     <option value="2">Graph3</option>
             </select>
-            <select class="center-select select" name="month" id="family-select">
+            <select class="select" name="month" id="family-select">
                 <option id="select2" value="">Select a period of time</option>
                 {% for famille in familles%}
                     <option value="">{{famille}}</option>
                 {%endfor%}
             </select>
-            <select class="right-select select" name="family" id="family-select">
+            <select class="select" name="family" id="family-select">
                 <option id="select3" value="">Choose a family</option>
                 {% for famille in familles%}
                     <option value="">{{famille}}</option>
@@ -89,37 +89,37 @@
     const myArray_names = names.replace("dict_keys([","").replace("])","").split(",").reverse()
     const myArray = values.replace("dict_values([","").replace("])","").split(",").reverse()
 
-            // l'identifiant est celui du canevas
-            var ctx = document.getElementById('graphique').getContext('2d');
-            // création du graphique
-            var myChart = new Chart(ctx, {
-            type: 'bar',   // le type du graphique
-            data: {        // les données
-                labels: myArray_names,
-                datasets: [{
-                            label: 'Cows born over the decades',
-                            data:myArray,
-                            backgroundColor: [ //couleur du fond des batonets
-                            'rgba(255, 99, 132, 0.2)',//red (red, green, blue, transparency)
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)', //les bords des batonets
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1, //épaiseur des bords
-                        }]
-                },
-                }
-            );
+    // l'identifiant est celui du canevas
+    var ctx = document.getElementById('graphique').getContext('2d');
+    // création du graphique
+    var myChart = new Chart(ctx, {
+    type: 'bar',   // le type du graphique
+    data: {        // les données
+        labels: myArray_names,
+        datasets: [{
+            label: 'Cows born over the decades',
+            data:myArray,
+            backgroundColor: [ //couleur du fond des batonets
+            'rgba(255, 99, 132, 0.2)',//red (red, green, blue, transparency)
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)', //les bords des batonets
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1, //épaiseur des bords
+            }]
+        },
+        }
+    );
 
     function chart_creation(graph_type){
         if(graph_type==0){
