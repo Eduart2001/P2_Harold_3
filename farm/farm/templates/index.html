@@ -89,8 +89,6 @@
     const myArray_names = names.replace("dict_keys([","").replace("])","").split(",").reverse()
     const myArray = values.replace("dict_values([","").replace("])","").split(",").reverse()
 
-    function chart_creation(graph_type){
-        if(graph_type==0){
             // l'identifiant est celui du canevas
             var ctx = document.getElementById('graphique').getContext('2d');
             // création du graphique
@@ -99,7 +97,7 @@
             data: {        // les données
                 labels: myArray_names,
                 datasets: [{
-                            label: 'votes',
+                            label: 'Cows born over the decades',
                             data:myArray,
                             backgroundColor: [ //couleur du fond des batonets
                             'rgba(255, 99, 132, 0.2)',//red (red, green, blue, transparency)
@@ -120,13 +118,12 @@
                             borderWidth: 1, //épaiseur des bords
                         }]
                 },
-                options: {
-             
-                   responsive: false
-             
-                }
                 }
             );
+
+    function chart_creation(graph_type){
+        if(graph_type==0){
+
             }
         if(graph_type==1){
                         // l'identifiant est celui du canevas
