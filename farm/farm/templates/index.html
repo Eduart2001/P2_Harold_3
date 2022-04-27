@@ -23,7 +23,7 @@
                             <a href="#" class="nav-link" id="types">Animal types </a>
                         </li>
                         <li> 
-                            <a href="#" class="nav-link" id="graphics">Graphics</a>
+                            <a href="#" class="nav-link" id="charts">charts</a>
                         </li>
                         <li> 
                             <a href="#" class="nav-link" id="contact">Contact</a>
@@ -52,8 +52,8 @@
         </div>
     {%endblock%}
     
-    {%block graphics%}
-        <div class="graphics-selector">
+    {%block charts%}
+        <div class="charts-selector">
             <select class="left-select select" name="graph-to-display" id="graph-select">
                 <option value="">Choose a graph to show</option>
                     <option value="0">Graph1</option>
@@ -74,10 +74,10 @@
             </select>
         </div>
         <div class="center-button">
-            <button class="button button1" onClick="graphic_creation(document.getElementById('graph-select').value)">Show</button><!--Bouton pour montrer le graphique-->
-          </div>
+            <button class="button button1" onClick="chart_creation(document.getElementById('graph-select').value)">Show</button><!--Bouton pour montrer le graphique-->
+        </div>
         <!--<p id="demo"></p>-->
-    <canvas id="graphique" width="25px" height="10px"></canvas>
+        <div class="chart"><canvas id="graphique" width="800px" height="550px"></canvas></div>
     {%endblock%}
 
 
@@ -88,11 +88,8 @@
     var values = "{{values}}"
     const myArray_names = names.replace("dict_keys([","").replace("])","").split(",").reverse()
     const myArray = values.replace("dict_values([","").replace("])","").split(",").reverse()
-    console.log(myArray);
-    console.log(values);
-    console.log(typeof values);
-    console.log(typeof values);
-    function graphic_creation(graph_type){
+
+    function chart_creation(graph_type){
         if(graph_type==0){
             // l'identifiant est celui du canevas
             var ctx = document.getElementById('graphique').getContext('2d');
@@ -122,6 +119,11 @@
                             ],
                             borderWidth: 1, //épaiseur des bords
                         }]
+                },
+                options: {
+             
+                   responsive: false
+             
                 }
                 }
             );
@@ -203,7 +205,7 @@
     // Define the language reload anchors
     var language = {
       fr: {
-        farm: "La Ferme",service:"Services",type:"Types d' animaux",graphic:"Graphiques" ,lang:"En"
+        farm: "La Ferme",service:"Services",type:"Types d' animaux",chart:"Graphiques" ,lang:"En"
       }
     };
   
@@ -219,8 +221,8 @@
           language.fr.service;
           types.textContent =
           language.fr.type;
-          graphics.textContent =
-          language.fr.graphic;
+          charts.textContent =
+          language.fr.chart;
           languageSwitcher.textContent =
           language.fr.lang;
       }

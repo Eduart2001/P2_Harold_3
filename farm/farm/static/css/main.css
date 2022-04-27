@@ -57,6 +57,7 @@ header{
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
+    
 }
 .button1 {
     text-align: center;
@@ -69,37 +70,30 @@ header{
     background-color: #4CAF50;
     color: white;
 }
-.center-button{
-    margin: 0;
-    position: absolute;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
-.center-select{
-    margin: 0;
-    position: absolute;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-  }
-.left-select{
-    margin: 0;
-    position: absolute;
-    left: 36.9%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
-.right-select{
-    margin: 0;
-    position: absolute;
-    left: 61.5%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
 .select{
+    width: 200px;
     border-radius: 8px; 
     padding: 10px; 
     background-color:paleturquoise; 
     border:none;
+}
+.charts-selector{
+    
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding-top: 32px;
+    justify-content: center;
+    gap: 10px 20px;
+}
+.center-button{
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+.chart{
+    width:800px;
+    margin: auto;
+    justify-content: space-around;
+
 }
