@@ -5,6 +5,11 @@ body{
     margin-top: 80px;
     font-family: 'Courier New', Courier, monospace;
 }
+
+p{
+    margin-left: 2%;
+    margin-right: 2%;
+}
 header{
     position: fixed;
     top:0;
