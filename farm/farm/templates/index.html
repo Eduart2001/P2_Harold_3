@@ -45,19 +45,19 @@
     {%block farmblock%}
         <div class="thefarm-block">
             <img src="static\images\home-image.jpg" class="farm-image">
-            <head>
+            <h1 id= "farmtitle" class="titles">
                 The Farm
-            </head>
-            <p id="thefarmlabel">
+            </h1>
+            <p class= "paragraph" id="thefarmlabel">
                 Our farm, the farm of the three Oaks celebrated
                 its 150th birthday last year. It has since then been bequeathed from father
                 to son across generations and we do our best to satisfy the local
                 community's needs.
             </p>
-            <head>
+            <h1 class="titles">
                 Services
-            </head>
-              <p id="serviceslabel">
+            </h1>
+              <p class= "paragraph" id="serviceslabel">
                 In our mostly dairy farm
                 we offer different kinds of services and products. We have fresh milk every
                 morning and a whole lot of different cheese types (on demand). During the
@@ -66,10 +66,10 @@
                 delivery service, feel free to call, you can find our phone number in the
                 contact section of this website.
               </p>
-              <head>
+              <h1 id = "animaltypestitle" class="titles">
                   Animal Types
-              </head>
-              <p id="animaltypeslabel">
+              </h1>
+              <p class= "paragraph" id="animaltypeslabel">
                 In our cosy little
                 farm you can find three different breeds of cows. We have Holsteins, Jerseys
                 and some Blanc Bleu Belge. Due to a database that we keep up to date since
@@ -77,10 +77,10 @@
                 farm. If you are interessed in this, you can find interactive graphs about
                 all this data on this website. We also take care of a small number of hen.
               </p>
-              <head id="charts">
+              <h1 id = "charttitle" class="titles">
                   Charts
-              </head>
-              <p id="chartslabel">
+              </h1>
+              <p class= "paragraph" id="chartslabel">
                 In this section you
                 will find a few different graphs highlighting various types of data. Feel
                 free to play around with them if you want to learn more about our farm.
@@ -116,7 +116,15 @@
         <div class="chart"><canvas id="graphique" width="800px" height="550px"></canvas></div>
     {%endblock%}
 
-
+    {%block contact%}
+    <h1 class="titles">
+        Contact
+    </h1>
+    <p class= "paragraph" id="contactlabel">
+      To join us : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be
+      We will try our best to answer you as soon as possible.
+    </p>
+    {% endblock %}
   <script>
     // Create a function to change
     // the hash value of the page
@@ -244,7 +252,8 @@
         servicesText:"Dans notre ferme, principalement laitière, nous proposons différents produits et services. Nous proposons du lait frais tous les matins mais également différentes sortes de fromages pour tous les goûts(sur demande). En été vous pouvez également acheter des oeufs du jour, venez tôt car le stock est limité. De plus nous proposons un service de livraison à domicile, n'hésitez pas à appeler le numéro qui se trouve dans la partie contact du site si vous voulez en bénéficier.", 
         animalTypesText:"Dans notre modeste ferme on peut trouver trois races de vaches. Nous avons des Holstein, Jersey et des Blanc Bleu Belge. Grâce à une base de données que nous tenons à jour depuis les années 90, nous disposons d'une grande quantité d'informations sur toutes les vaches qui sont passées par cette ferme. Si ça vous intéresse vous pouvez retrouver sur ce site des graphiques interactifs reprenant ces données. Nous avons également un petit poulailler mais ce n'est pas notre élevage principal.", 
         chartText:"Dans cette section il y a différents graphiques interactifs mettant en avant plusieurs catégories de données. N'hésitez pas à les consulter pour en apprendre plus sur notre ferme.", 
-        contactText:"Pour nous joindre : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be Nous ferons de notre mieux pour vous répondre au plus vite."
+        contactText:"Pour nous joindre : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be Nous ferons de notre mieux pour vous répondre au plus vite.",
+        farmtit:"La Ferme", animaltypestit:"Types d' animaux", charttitletit:"Graphiques"
       }
     };
   
@@ -254,8 +263,15 @@
       // Set the content of the webpage 
       // depending on the hash values
       if (window.location.hash == "#Fr") {
+          farmtitle.textContent = language.fr.farmtit;
+          animaltypestitle.textContent = language.fr.animaltypestit;
+          charttitle.textContent = language.fr.charttitletit;
+
           thefarmlabel.textContent = language.fr.theFarmText;
+          serviceslabel.textContent = language.fr.servicesText;
+          animaltypeslabel.textContent = language.fr.animalTypesText;
           chartslabel.textContent = language.fr.chartText; //continuer à changer les noms
+          contactlabel.textContent = language.fr.contactText;
           bouton.textContent = language.fr.button;
           select1.textContent = language.fr.selection1;
           select2.textContent = language.fr.selection2;
@@ -263,18 +279,9 @@
           theFarm.textContent = language.fr.farm;
           services.textContent = language.fr.service;
           types.textContent = language.fr.type;
-          charts.textContent = language.fr.chart;
+          charts.textContent = language.fr.graphic;
           languageSwitcher.textContent = language.fr.lang;
       }
     }
   </script>
-  {%block contact%}
-  <head>
-      Contact
-  </head>
-  <p id="contactlabel">
-    To join us : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be
-    We will try our best to answer you as soon as possible.
-  </p>
-  {% endblock %}
 {% endblock %}

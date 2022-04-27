@@ -97,3 +97,9 @@ header{
     justify-content: space-around;
 
 }
+.paragraph{
+    font-family: 'Times New Roman', serif;
+}
+.titles{
+    font-family: Georgia, serif;
+}
