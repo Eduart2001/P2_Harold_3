@@ -55,27 +55,27 @@
     {%block charts%}
         <div class="charts-selector">
             <select class="left-select select" name="graph-to-display" id="graph-select">
-                <option value="">Choose a graph to show</option>
+                <option id="select1" value="">Choose a graph to show</option>
                     <option value="0">Graph1</option>
                     <option value="1">Graph2</option>
                     <option value="2">Graph3</option>
             </select>
             <select class="center-select select" name="month" id="family-select">
-                <option value="">Select a period of time</option>
+                <option id="select2" value="">Select a period of time</option>
                 {% for famille in familles%}
                     <option value="">{{famille}}</option>
                 {%endfor%}
             </select>
             <select class="right-select select" name="family" id="family-select">
-                <option value="">Choose a family</option>
+                <option id="select3" value="">Choose a family</option>
                 {% for famille in familles%}
                     <option value="">{{famille}}</option>
                 {%endfor%}
             </select>
         </div>
         <div class="center-button">
-            <button class="button button1" onClick="chart_creation(document.getElementById('graph-select').value)">Show</button><!--Bouton pour montrer le graphique-->
-        </div>
+            <button id="bouton" class="button button1" onClick="graphic_creation(document.getElementById('graph-select').value)">Show</button><!--Bouton pour montrer le graphique-->
+          </div>
         <!--<p id="demo"></p>-->
         <div class="chart"><canvas id="graphique" width="800px" height="550px"></canvas></div>
     {%endblock%}
@@ -205,7 +205,7 @@
     // Define the language reload anchors
     var language = {
       fr: {
-        farm: "La Ferme",service:"Services",type:"Types d' animaux",chart:"Graphiques" ,lang:"En"
+        farm: "La Ferme",service:"Services",type:"Types d' animaux",graphic:"Graphiques" ,lang:"En", button:"Afficher", selection1:"Choisissez un graphique", selection2:"Choisissez une période", selection3:"Choix de la famille"
       }
     };
   
@@ -215,6 +215,10 @@
       // Set the content of the webpage 
       // depending on the hash value
       if (window.location.hash == "#Fr") {
+          bouton.textContent = language.fr.button;
+          select1.textContent = language.fr.selection1;
+          select2.textContent = language.fr.selection2;
+          select3.textContent = language.fr.selection3;
           theFarm.textContent =
           language.fr.farm;
           services.textContent =
