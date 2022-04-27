@@ -5,6 +5,9 @@ body{
     margin-top: 80px;
     font-family: 'Courier New', Courier, monospace;
 }
+html {
+    scroll-behavior: smooth;
+  }
 header{
     position: fixed;
     top:0;
@@ -99,7 +102,10 @@ header{
 }
 .paragraph{
     font-family: 'Times New Roman', serif;
+    color:darkslategray;
 }
 .titles{
     font-family: Georgia, serif;
+    font-style: italic;
+    text-shadow: 2px 5px 0 rgba(0,0,0,0.2);
 }

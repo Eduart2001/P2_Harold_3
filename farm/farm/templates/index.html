@@ -14,19 +14,19 @@
                             
                             It contains four list items to which we are going to associate a link to redirect us.  -->
                         <li> 
-                            <a href="#" class="nav-link" id="theFarm">The Farm</a>
+                            <a href="#first" class="nav-link" id="theFarm">The Farm</a>
                         </li>
                         <li> 
-                            <a href="#" class="nav-link" id="services">Services</a>
+                            <a href="#farmtitle" class="nav-link" id="services">Services</a>
                         </li>
                         <li> 
-                            <a href="#" class="nav-link" id="types">Animal types </a>
+                            <a href="#second" class="nav-link" id="types">Animal types </a>
                         </li>
                         <li> 
-                            <a href="#" class="nav-link" id="charts">Charts</a>
+                            <a href="#third" class="nav-link" id="charts">Charts</a>
                         </li>
                         <li> 
-                            <a href="#" class="nav-link" id="contact">Contact</a>
+                            <a href="#bottom" class="nav-link" id="contact">Contact</a>
                         </li>
 
                         <div class="language">
@@ -43,8 +43,9 @@
 
 {%block body%}
     {%block farmblock%}
-        <div class="thefarm-block">
+        <div style="background-image: linear-gradient(rgb(109, 199, 0, 1) 50%, rgba(109, 199, 0, 0));" class="thefarm-block">
             <img src="static\images\home-image.jpg" class="farm-image">
+            <a id="first" style="position:relative; top: -25px;"></a>
             <h1 id= "farmtitle" class="titles">
                 The Farm
             </h1>
@@ -54,9 +55,10 @@
                 to son across generations and we do our best to satisfy the local
                 community's needs.
             </p>
-            <h1 class="titles">
+            <h1 id = "servicestitle" class="titles">
                 Services
             </h1>
+            <a id="second" style="position:relative; top: -25px;"></a>
               <p class= "paragraph" id="serviceslabel">
                 In our mostly dairy farm
                 we offer different kinds of services and products. We have fresh milk every
@@ -69,6 +71,7 @@
               <h1 id = "animaltypestitle" class="titles">
                   Animal Types
               </h1>
+              <a id="third" style="position:relative; top: -25px;"></a>
               <p class= "paragraph" id="animaltypeslabel">
                 In our cosy little
                 farm you can find three different breeds of cows. We have Holsteins, Jerseys
@@ -121,9 +124,12 @@
         Contact
     </h1>
     <p class= "paragraph" id="contactlabel">
-      To join us : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be
+      To join us : <br>
+      - tel 0356/55 12 25 <br> 
+      - email : ferme3chenes@cows.be <br>
       We will try our best to answer you as soon as possible.
     </p>
+    <a id="bottom"></a>
     {% endblock %}
   <script>
     // Create a function to change
@@ -252,7 +258,10 @@
         servicesText:"Dans notre ferme, principalement laitière, nous proposons différents produits et services. Nous proposons du lait frais tous les matins mais également différentes sortes de fromages pour tous les goûts(sur demande). En été vous pouvez également acheter des oeufs du jour, venez tôt car le stock est limité. De plus nous proposons un service de livraison à domicile, n'hésitez pas à appeler le numéro qui se trouve dans la partie contact du site si vous voulez en bénéficier.", 
         animalTypesText:"Dans notre modeste ferme on peut trouver trois races de vaches. Nous avons des Holstein, Jersey et des Blanc Bleu Belge. Grâce à une base de données que nous tenons à jour depuis les années 90, nous disposons d'une grande quantité d'informations sur toutes les vaches qui sont passées par cette ferme. Si ça vous intéresse vous pouvez retrouver sur ce site des graphiques interactifs reprenant ces données. Nous avons également un petit poulailler mais ce n'est pas notre élevage principal.", 
         chartText:"Dans cette section il y a différents graphiques interactifs mettant en avant plusieurs catégories de données. N'hésitez pas à les consulter pour en apprendre plus sur notre ferme.", 
-        contactText:"Pour nous joindre : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be Nous ferons de notre mieux pour vous répondre au plus vite.",
+        contactText:`Pour nous joindre :
+        \n- tel 0356/55 12 25
+        \n- email : ferme3chenes@cows.be 
+        \nNous ferons de notre mieux pour vous répondre au plus vite.`,
         farmtit:"La Ferme", animaltypestit:"Types d' animaux", charttitletit:"Graphiques"
       }
     };
