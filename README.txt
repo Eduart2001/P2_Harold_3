@@ -4,7 +4,7 @@ create a virtual environment
 
 :on windows:
     -if on VScode open terminal CMD
-        
+        py -m pip install virtualenv
         py -3 -m install venv venv
 
         -to activate venv-
@@ -34,6 +34,8 @@ then you will se a new folder farm.egg-info appearing
 
 
 :to launch the project :
+you have to install some packages
+    - pip install ephem
 
 activate the venv if not activated
    
@@ -41,7 +43,7 @@ activate the venv if not activated
 
 follow it with
 
-    set FLASK_APP=farm
+    set FLASK_APP=farm.farm
     set FLASK_ENV=development
     flask run
 

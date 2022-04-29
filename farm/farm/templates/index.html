@@ -90,7 +90,7 @@
       <option value="2">Graph2</option>
       <option value="3">Graph3</option>
     </select>
-    <select hidden class="select" name="month" id="month-select">
+    <select hidden class="select" name="month" id="start-month-select">
       <option id="select2" value="">--Select Month--</option>
       <option selected value="01">Janaury</option>
       <option value="02">February</option>
@@ -105,7 +105,7 @@
       <option value="11">November</option>
       <option value="12">December</option>
     </select>
-    <select hidden class="select" name="year" id="year-select">
+    <select hidden class="select" name="year" id="start-year-select">
       <option id="select3" value="">Select year</option>
       {% for i in range(min,max+1)%}
       <option selected value="{{i}}">{{i}}</option>
@@ -141,7 +141,7 @@
       {%endfor%}
     </select>
     <select hidden class="select" name="fullmoon" id="fullmoon-select">
-      <option id="select7" value="">Choose an option</option>
+      <option id="select7" value="-1">Choose an option</option>
       <option value="fullmoon">full moon</option>
       <option value="other">other</option>
       <option value="both">both</option>
@@ -210,6 +210,26 @@
         },
       ],
     },
+    options: {
+      responsive: true,
+      legend: {
+          display: false
+      },
+      title: {
+          display: false,
+          text: 'Chart.js bar Chart'
+      },
+      animation: {
+          animateScale: true
+      },
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero: true,
+              }
+          }]
+      }
+  }
   });
 
   function update() {
@@ -221,10 +241,10 @@
         $.ajax({
           data: {
             chartId: $("#chart-select").val(),
-            start_month: $("#month-select").val(),
-            start_year: $("#year-select").val(),
-            end_date:
-              $("#end-month-select").val() + "/" + $("#end-year-select").val(),
+            start_month: $("#start-month-select").val(),
+            start_year: $("#start-year-select").val(),
+            end_month:$("#end-month-select").val(),
+            end_year: $("#end-year-select").val(),
             family_filter: $("#family-select").val(),
             chartId: $("#chart-select").val(),
             fullMoon: $("#fullmoon-select").val(),
@@ -232,7 +252,7 @@
           type: "POST",
           url: "/charts",
         }).done(function (data) {
-          $("#output").text(data.keys, data.values);
+
           try {
             //Transformin jsonify dictionnary to array
             var keys = data.keys
@@ -246,20 +266,31 @@
               .replace("])", "")
               .split(",")
               .reverse();
-          } catch {
-            var keys = [data.keys];
-            var keys = [data.values];
-          }
 
-          chart_creation(selectedChart, keys, values);
-          $("#output").text(data.keys, data.values);
-          $("#output").text(data.error);
+            chart_creation(selectedChart, keys, values);
+          } catch {
+            var values = data.error
+              .replace("dict_values(", "")
+              .replace(",)", "")
+              .split(",")
+              .reverse();
+            console.log(values)
+            for(var x in values){
+              missingData(values[x])
+            }
+            console.log("ERROR")
+          }
         });
         e.preventDefault();
       });
     });
   }
-
+  function missingData(name){
+    var css_error={ 
+      "border": "2px solid red",
+      "border-radius":" 8px"};   
+    $("#"+name).css(css_error)
+  }
   function chart_creation(chart_type, keys, values) {
     console.log(chart);
     if (chart_type == 0) {
@@ -379,98 +410,113 @@
   //when chart-select is changed hide and show the wanted selects
   $("#chart-select").on("change", function () {
     var selectValue = $(this).val();
-
+    var css_changes={ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" }
     if (selectValue == 1) {
-      $("#month-select").show();
-      $("#end-month-select").show();
-      $("#year-select").show();
-      $("#end-year-select").show();
-      $("#family-select").show();
-      $("#fullmoon-select").hide();
+      $("#start-month-select").show().css(css_changes);
+      $("#end-month-select").show().css(css_changes);
+      $("#start-year-select").show().css(css_changes);
+      $("#end-year-select").show().css(css_changes);
+      $("#family-select").show().css(css_changes);
+      $("#fullmoon-select").hide().css(css_changes);
     } else if (selectValue == 2) {
-      $("#year-select").hide();
-      $("#month-select").show();
-      $("#month-select").on("change", function () {
-        var monthValue = $(this).val();
-        if (monthValue == 0) {
-          $("#year-select").show();
-        } else {
-          $("#year-select").hide();
-        }
-      });
-      $("#end-month-select").hide();
-      $("#end-year-select").hide();
-      $("#family-select").show();
-      $("#fullmoon-select").show();
+      $("#start-month-select").show().css(css_changes);
+      $("#start-year-select").show().css(css_changes);
+      $("#end-month-select").hide().css(css_changes);
+      $("#end-year-select").hide().css(css_changes);
+      $("#family-select").show().css(css_changes);
+      $("#fullmoon-select").show().css(css_changes);
     } else if (selectValue == 3) {
     } else {
-      $("#month-select").hide();
-      $("#end-month-select").hide();
-      $("#year-select").hide();
-      $("#end-year-select").hide();
-      $("#family-select").hide();
-      $("#fullmoon-select").hide();
+      $("#start-month-select").hide().css(css_changes);
+      $("#end-month-select").hide().css(css_changes);
+      $("#start-year-select").hide().css(css_changes);
+      $("#end-year-select").hide().css(css_changes);
+      $("#family-select").hide().css(css_changes);
+      $("#fullmoon-select").hide().css(css_changes);
     }
   });
 
-  $("#month-select").on("change", function () {
+  $("#start-month-select").on("change", function () {
     //Verify that the selected months are correct start date cant be older that end date
-    var monthSelector = document.getElementById("month-select").value;
+    var monthSelector = document.getElementById("start-month-select").value;
     var endMonthSelector = document.getElementById("end-month-select").value;
     //year variables
-    var yearSelector = document.getElementById("year-select").value;
+    var yearSelector = document.getElementById("start-year-select").value;
     var endYearSelector = document.getElementById("end-year-select").value;
-
+    $("#start-month-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
     if (endYearSelector <= yearSelector) {
       if (endMonthSelector <= monthSelector) {
-        document.querySelector("#month-select").value = endMonthSelector;
+        document.querySelector("#start-month-select").value = endMonthSelector;
       }
-      document.querySelector("#year-select").value = endYearSelector;
+      document.querySelector("#start-year-select").value = endYearSelector;
     }
   });
   $("#end-month-select").on("change", function () {
     //Verify that the selected months are correct start date cant be older that end date
-    var monthSelector = document.getElementById("month-select").value;
+    var monthSelector = document.getElementById("start-month-select").value;
     var endMonthSelector = document.getElementById("end-month-select").value;
     //year variables
-    var yearSelector = document.getElementById("year-select").value;
+    var yearSelector = document.getElementById("start-year-select").value;
     var endYearSelector = document.getElementById("end-year-select").value;
+    $("#end-month-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
     if (endYearSelector <= yearSelector) {
       if (endMonthSelector <= monthSelector) {
-        document.querySelector("#month-select").value = endMonthSelector;
+        document.querySelector("#start-month-select").value = endMonthSelector;
       }
-      document.querySelector("#year-select").value = endYearSelector;
+      document.querySelector("#start-year-select").value = endYearSelector;
     }
   });
-  $("#year-select").on("change", function () {
+  $("#start-year-select").on("change", function () {
     //Verify that the selected years are correct start date cant be older that end date
-    var monthSelector = document.getElementById("month-select").value;
+    var monthSelector = document.getElementById("start-month-select").value;
     var endMonthSelector = document.getElementById("end-month-select").value;
     //year variables
-    var yearSelector = document.getElementById("year-select").value;
+    var yearSelector = document.getElementById("start-year-select").value;
     var endYearSelector = document.getElementById("end-year-select").value;
+    $("#start-year-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
     if (endYearSelector <= yearSelector) {
       if (endMonthSelector <= monthSelector) {
-        document.querySelector("#month-select").value = endMonthSelector;
+        document.querySelector("#start-month-select").value = endMonthSelector;
       }
-      document.querySelector("#year-select").value = endYearSelector;
+      document.querySelector("#start-year-select").value = endYearSelector;
     }
   });
   $("#end-year-select").on("change", function () {
     //Verify that the selected months are correct start date cant be older that end date
-    var monthSelector = document.getElementById("month-select").value;
+    var monthSelector = document.getElementById("start-month-select").value;
     var endMonthSelector = document.getElementById("end-month-select").value;
     //year variables
-    var yearSelector = document.getElementById("year-select").value;
+    var yearSelector = document.getElementById("start-year-select").value;
     var endYearSelector = document.getElementById("end-year-select").value;
+    $("#end-year-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
     if (endYearSelector <= yearSelector) {
       if (endMonthSelector <= monthSelector) {
-        document.querySelector("#month-select").value = endMonthSelector;
+        document.querySelector("#start-month-select").value = endMonthSelector;
       }
-      document.querySelector("#year-select").value = endYearSelector;
+      document.querySelector("#start-year-select").value = endYearSelector;
     }
   });
-
+  $("#fullmoon-select").on("change", function () {
+    $("#fullmoon-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+  });
   // Define the language reload anchors
   var language = {
     fr: {

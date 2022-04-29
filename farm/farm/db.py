@@ -131,6 +131,8 @@ def get_from_db(name,table):
         return l
     except:
         raise ValueError()
+    
+
 def get_min_year():
     try:
         db=connect_db()
@@ -239,7 +241,7 @@ def graph1(startDate,endDate,famille=None):
     except:
         return d
 #print(graph1("01/01/1990","12/1990"))
-print(graph1("03/10/2000","11/2010","Bleuet"))#28
+#print(graph1("03/10/2000","11/2010","Bleuet"))#28
 
 def graph2(year=None,month=None,famille=None,fullmoon=None):
     """graph2 function helps to extract necessary data, it shows the number of born calvings on a full moon and
@@ -287,9 +289,11 @@ def graph2(year=None,month=None,famille=None,fullmoon=None):
             dict["full"]=full_moon
         elif fullmoon=="other":
             dict["other"]=other_day
-        else:
+        elif fullmoon=="both":
             dict["full"]=full_moon
             dict["other"]=other_day
+        else:
+            return -1
         return dict
     except:
         raise ValueError
