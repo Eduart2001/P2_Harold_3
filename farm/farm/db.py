@@ -6,7 +6,7 @@ import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort,render_template, flash
 import click
 from flask.cli import with_appcontext
-
+import calendar
 app = Flask(__name__) # create the application instance :)
 app.config.from_object(__name__) # load config from this file 
 
@@ -75,7 +75,9 @@ def init_app(app):
    
 import ephem
 #PyEphem provides an ephem Python package for performing high-precision astronomy computations
-
+def last_day(date):
+    temp=time.strptime(date, "%m/%Y")
+    return str(calendar.monthrange(temp[0], temp[1])[1])
 def get_moons_in_year(year):
     """Returns a list of the full  in a year. The list contains tuples
         of  the form (DATE,'full')
@@ -201,7 +203,7 @@ def graph1(startDate,endDate,famille=None):
         dictionnary: where the key is the date and the value is the number of clavings born on that day
     """
     startDate=time.strptime(startDate, "%d/%m/%Y")
-    endDate=time.strptime(endDate, "%d/%m/%Y")
+    endDate=time.strptime(last_day(endDate)+"/"+endDate, "%d/%m/%Y")
     def get_id_from_same_family(name):
         l=[]
         for i in cursor.execute(f"SELECT id from animaux where famille_id =(SELECT id from familles where nom like '{name}')"):
@@ -236,10 +238,10 @@ def graph1(startDate,endDate,famille=None):
         return d
     except:
         return d
-#print(graph1("03/10/2000","19/11/2010"))
-#print(graph1("03/10/2000","19/11/2010","Bleuet"))#28
+#print(graph1("01/01/1990","12/1990"))
+print(graph1("03/10/2000","11/2010","Bleuet"))#28
 
-def graph2(year,month=None,famille=None):
+def graph2(year=None,month=None,famille=None,fullmoon=None):
     """graph2 function helps to extract necessary data, it shows the number of born calvings on a full moon and
        the number of born calvings outside the full moon, through one specified periode
        the search could be specified to a single family, if none it will show all
@@ -254,7 +256,7 @@ def graph2(year,month=None,famille=None):
         list: with 2 tuples the 1st one contains the number of the calvings born on the full moon, and the text 'full moon' the 
               2nd contains the calvings born outside the full moon, and the text 'other'
     """
-    d={}
+    dict={}
     if month!=None:
         k=get_full_moon_in_month(year,month)
     else:
@@ -268,24 +270,29 @@ def graph2(year,month=None,famille=None):
             import calendar
             first_day=1
             last_day=calendar.monthrange(year, month)[1]
-            d=graph1(f"{first_day}/{month}/{year}",f"{last_day}/{month}/{year}",famille)
+            d=graph1(f"{first_day}/{month}/{year}",f"{month}/{year}",famille)
             for i in d.keys():
                 if i==l[0]:
                     full_moon+=d[i]
                 else:
                     other_day+=d[i]
         else:
-            d=graph1(f"0{1}/0{1}/{year}",f"{31}/{12}/{year}",famille)
-            print(d)
+            d=graph1(f"0{1}/0{1}/{year}",f"{12}/{year}",famille)
             for i in d.keys():
                 if i in l:
                     full_moon+=d[i]
                 else:
                     other_day+=d[i]
-        return [(full_moon,"full"),(other_day,"other")]
+        if fullmoon=="fullmoon":      
+            dict["full"]=full_moon
+        elif fullmoon=="other":
+            dict["other"]=other_day
+        else:
+            dict["full"]=full_moon
+            dict["other"]=other_day
+        return dict
     except:
         raise ValueError
-    
     
     
 #print(graph2(2000))

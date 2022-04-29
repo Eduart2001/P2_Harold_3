@@ -80,7 +80,17 @@ header{
     background-color:paleturquoise; 
     border:none;
 }
+
 .charts-selector{
+    
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding-top: 32px;
+    justify-content: center;
+    gap: 10px 20px;
+}
+.charts-selector-filter{
     
     list-style: none;
     display: flex;

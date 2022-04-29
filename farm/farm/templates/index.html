@@ -1,296 +1,538 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {%block head%} {%block option_bar%}
+<!--creating an option bar to access easily the different,
+    categories or services of the webpage-->
+<header>
+  <div class="container">
+    <!--container(name) division helps to separate our work in smaller divisions, 
+                so it will be easier to implement or manipulate with CSS styles-->
+    <div class="nav-list">
+      <!--nav-list(name) division helps to separate our work in smaller divisions, 
+                    so it will be easier to implement or manipulate with CSS styles 
+                    
+                    It contains four list items to which we are going to associate a link to redirect us.  -->
+      <li>
+        <a href="#first" class="nav-link" id="theFarm">The Farm</a>
+      </li>
+      <li>
+        <a href="#farmtitle" class="nav-link" id="services">Services</a>
+      </li>
+      <li>
+        <a href="#second" class="nav-link" id="types">Animal types </a>
+      </li>
+      <li>
+        <a href="#third" class="nav-link" id="charts">Charts</a>
+      </li>
+      <li>
+        <a href="#bottom" class="nav-link" id="contact">Contact</a>
+      </li>
 
-{%block head%}
-    {%block option_bar%}
-        <!--creating an option bar to access easily the different,
-            categories or services of the webpage-->
-            <header>
-                <div class="container">
-                    <!--container(name) division helps to separate our work in smaller divisions, 
-                        so it will be easier to implement or manipulate with CSS styles-->
-                    <div class="nav-list">
-                        <!--nav-list(name) division helps to separate our work in smaller divisions, 
-                            so it will be easier to implement or manipulate with CSS styles 
-                            
-                            It contains four list items to which we are going to associate a link to redirect us.  -->
-                        <li> 
-                            <a href="#first" class="nav-link" id="theFarm">The Farm</a>
-                        </li>
-                        <li> 
-                            <a href="#farmtitle" class="nav-link" id="services">Services</a>
-                        </li>
-                        <li> 
-                            <a href="#second" class="nav-link" id="types">Animal types </a>
-                        </li>
-                        <li> 
-                            <a href="#third" class="nav-link" id="charts">Charts</a>
-                        </li>
-                        <li> 
-                            <a href="#bottom" class="nav-link" id="contact">Contact</a>
-                        </li>
-
-                        <div class="language">
-                            <li>
-                                <a onclick="changeLanguage()" class="nav-link" id="languageSwitcher">Fr</a>
-                            </li>
-                        </div>
-                    </div>
-                </div>
-            </header>
-        {% endblock %}
-{% endblock %}
-
-
-{%block body%}
-    {%block farmblock%}
-        <div style="background-image: linear-gradient(rgb(109, 199, 0, 1) 50%, rgba(109, 199, 0, 0));" class="thefarm-block">
-            <img src="static\images\home-image.jpg" class="farm-image">
-            <a id="first" style="position:relative; top: -25px;"></a>
-            <h1 id= "farmtitle" class="titles">
-                The Farm
-            </h1>
-            <p class= "paragraph" id="thefarmlabel">
-                Our farm, the farm of the three Oaks celebrated
-                its 150th birthday last year. It has since then been bequeathed from father
-                to son across generations and we do our best to satisfy the local
-                community's needs.
-            </p>
-            <h1 id = "servicestitle" class="titles">
-                Services
-            </h1>
-            <a id="second" style="position:relative; top: -25px;"></a>
-              <p class= "paragraph" id="serviceslabel">
-                In our mostly dairy farm
-                we offer different kinds of services and products. We have fresh milk every
-                morning and a whole lot of different cheese types (on demand). During the
-                summer we also have a daily stock of eggs, although a relatively small
-                amount, so come early to be sure to have some. In addition, we hold a
-                delivery service, feel free to call, you can find our phone number in the
-                contact section of this website.
-              </p>
-              <h1 id = "animaltypestitle" class="titles">
-                  Animal Types
-              </h1>
-              <a id="third" style="position:relative; top: -25px;"></a>
-              <p class= "paragraph" id="animaltypeslabel">
-                In our cosy little
-                farm you can find three different breeds of cows. We have Holsteins, Jerseys
-                and some Blanc Bleu Belge. Due to a database that we keep up to date since
-                the nineties, we have tons of information about any cow that lived in this
-                farm. If you are interessed in this, you can find interactive graphs about
-                all this data on this website. We also take care of a small number of hen.
-              </p>
-              <h1 id = "charttitle" class="titles">
-                  Charts
-              </h1>
-              <p class= "paragraph" id="chartslabel">
-                In this section you
-                will find a few different graphs highlighting various types of data. Feel
-                free to play around with them if you want to learn more about our farm.
-              </p>
-        </div>
-    {%endblock%}
-    
-    {%block charts%}
-        <div class="charts-selector">
-            <select class="select" name="graph-to-display" id="graph-select">
-                <option id="select1" value="">Choose a graph to show</option>
-                    <option value="0">Graph1</option>
-                    <option value="1">Graph2</option>
-                    <option value="2">Graph3</option>
-            </select>
-            <select class="select" name="month" id="family-select">
-                <option id="select2" value="">Select a period of time</option>
-                {% for famille in familles%}
-                    <option value="">{{famille}}</option>
-                {%endfor%}
-            </select>
-            <select class="select" name="family" id="family-select">
-                <option id="select3" value="">Choose a family</option>
-                {% for famille in familles%}
-                    <option value="">{{famille}}</option>
-                {%endfor%}
-            </select>
-        </div>
-        <div class="center-button">
-            <button id="bouton" class="button button1" onClick="graphic_creation(document.getElementById('graph-select').value)">Show</button><!--Bouton pour montrer le graphique-->
-          </div>
-        <!--<p id="demo"></p>-->
-        <div class="chart"><canvas id="graphique" width="800px" height="550px"></canvas></div>
-    {%endblock%}
-
-    {%block contact%}
-    <h1 class="titles">
-        Contact
-    </h1>
-    <p class= "paragraph" id="contactlabel">
-      To join us : <br>
-      - tel 0356/55 12 25 <br> 
-      - email : ferme3chenes@cows.be <br>
-      We will try our best to answer you as soon as possible.
-    </p>
-    <a id="bottom"></a>
-    {% endblock %}
-  <script>
-    // Create a function to change
-    // the hash value of the page
-    var names= "{{keys}}"
-    var values = "{{values}}"
-    const myArray_names = names.replace("dict_keys([","").replace("])","").split(",").reverse()
-    const myArray = values.replace("dict_values([","").replace("])","").split(",").reverse()
-
-    // l'identifiant est celui du canevas
-    var ctx = document.getElementById('graphique').getContext('2d');
-    // création du graphique
-    var myChart = new Chart(ctx, {
-    type: 'bar',   // le type du graphique
-    data: {        // les données
-        labels: myArray_names,
-        datasets: [{
-            label: 'Cows born over the decades',
-            data:myArray,
-            backgroundColor: [ //couleur du fond des batonets
-            'rgba(255, 99, 132, 0.2)',//red (red, green, blue, transparency)
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)', //les bords des batonets
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1, //épaiseur des bords
-            }]
-        },
-        }
+      <div class="language">
+        <li>
+          <a onclick="changeLanguage()" class="nav-link" id="languageSwitcher"
+            >Fr</a
+          >
+        </li>
+      </div>
+    </div>
+  </div>
+</header>
+{% endblock %} {% endblock %} {%block body%} {%block farmblock%}
+<div
+  style="
+    background-image: linear-gradient(
+      rgb(109, 199, 0, 1) 50%,
+      rgba(109, 199, 0, 0)
     );
+  "
+  class="thefarm-block"
+>
+  <img src="static\images\home-image.jpg" class="farm-image" />
+  <a id="first" style="position: relative; top: -25px"></a>
+  <h1 id="farmtitle" class="titles">The Farm</h1>
+  <p class="paragraph" id="thefarmlabel">
+    Our farm, the farm of the three Oaks celebrated its 150th birthday last
+    year. It has since then been bequeathed from father to son across
+    generations and we do our best to satisfy the local community's needs.
+  </p>
+  <h1 id="servicestitle" class="titles">Services</h1>
+  <a id="second" style="position: relative; top: -25px"></a>
+  <p class="paragraph" id="serviceslabel">
+    In our mostly dairy farm we offer different kinds of services and products.
+    We have fresh milk every morning and a whole lot of different cheese types
+    (on demand). During the summer we also have a daily stock of eggs, although
+    a relatively small amount, so come early to be sure to have some. In
+    addition, we hold a delivery service, feel free to call, you can find our
+    phone number in the contact section of this website.
+  </p>
+  <h1 id="animaltypestitle" class="titles">Animal Types</h1>
+  <a id="third" style="position: relative; top: -25px"></a>
+  <p class="paragraph" id="animaltypeslabel">
+    In our cosy little farm you can find three different breeds of cows. We have
+    Holsteins, Jerseys and some Blanc Bleu Belge. Due to a database that we keep
+    up to date since the nineties, we have tons of information about any cow
+    that lived in this farm. If you are interessed in this, you can find
+    interactive graphs about all this data on this website. We also take care of
+    a small number of hen.
+  </p>
+  <h1 id="charttitle" class="titles">Charts</h1>
+  <p class="paragraph" id="chartslabel">
+    In this section you will find a few different graphs highlighting various
+    types of data. Feel free to play around with them if you want to learn more
+    about our farm.
+  </p>
+</div>
+{%endblock%} {%block charts%}
+<form id="form" method="POST">
+  <div class="charts-selector">
+    <select class="select" name="graph-to-display" id="chart-select">
+      <option id="select1" value="0">Choose a graph to show</option>
+      <option value="1">Graph1</option>
+      <option value="2">Graph2</option>
+      <option value="3">Graph3</option>
+    </select>
+    <select hidden class="select" name="month" id="month-select">
+      <option id="select2" value="">--Select Month--</option>
+      <option selected value="01">Janaury</option>
+      <option value="02">February</option>
+      <option value="03">March</option>
+      <option value="04">April</option>
+      <option value="05">May</option>
+      <option value="06">June</option>
+      <option value="07">July</option>
+      <option value="08">August</option>
+      <option value="09">September</option>
+      <option value="10">October</option>
+      <option value="11">November</option>
+      <option value="12">December</option>
+    </select>
+    <select hidden class="select" name="year" id="year-select">
+      <option id="select3" value="">Select year</option>
+      {% for i in range(min,max+1)%}
+      <option selected value="{{i}}">{{i}}</option>
+      {%endfor%}
+    </select>
+    <select hidden class="select" name="month" id="end-month-select">
+      <option id="select4" value="">--Select Month--</option>
+      <option id="01" value="01">Janaury</option>
+      <option id="02" value="02">February</option>
+      <option id="03" value="03">March</option>
+      <option id="04" value="04">April</option>
+      <option id="05" value="05">May</option>
+      <option id="06" value="06">June</option>
+      <option id="07" value="07">July</option>
+      <option id="08" value="08">August</option>
+      <option id="09" value="09">September</option>
+      <option id="10" value="10">October</option>
+      <option id="11" value="11">November</option>
+      <option id="12" selected value="12">December</option>
+    </select>
+    <select hidden class="select" name="year" id="end-year-select">
+      <option id="select5" value="">Select year</option>
+      {% for i in range(min,max+1)%}
+      <option selected value="{{i}}">{{i}}</option>
+      {%endfor%}
+    </select>
+  </div>
+  <div class="charts-selector-filter">
+    <select hidden class="select" name="family" id="family-select">
+      <option id="select6" value="">Choose a family</option>
+      {% for famille in familles%}
+      <option value="{{famille}}">{{famille}}</option>
+      {%endfor%}
+    </select>
+    <select hidden class="select" name="fullmoon" id="fullmoon-select">
+      <option id="select7" value="">Choose an option</option>
+      <option value="fullmoon">full moon</option>
+      <option value="other">other</option>
+      <option value="both">both</option>
+    </select>
+  </div>
 
-    function chart_creation(graph_type){
-        if(graph_type==0){
+  <div class="center-button">
+    <button id="bouton" class="button button1" onclick="update()">Show</button
+    ><!--Bouton pour montrer le graphique-->
+  </div>
+</form>
 
-            }
-        if(graph_type==1){
-                        // l'identifiant est celui du canevas
-                        var ctx = document.getElementById('graphique').getContext('2d');
-            // création du graphique
-            var myChart = new Chart(ctx, {
-            type: 'bar',   // le type du graphique
-            data: {        // les données
-                labels: ['Isai', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique'],
-                datasets: [{
-                            label: 'votes',
-                            data: [12, 19, 3, 5, 2, 3],
-                            backgroundColor: [ //couleur du fond des batonets
-                            'rgba(255, 99, 132, 0.2)',//red (red, green, blue, transparency)
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)', //les bords des batonets
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1, //épaiseur des bords
-                        }]
-                }
-                }
-            );
-        }
+<h3 id="output"></h3>
+<!--<p id="demo"></p>-->
+<div class="chart">
+  <canvas id="graphique" width="800px" height="550px"></canvas>
+</div>
+{%endblock%}
 
-        if(graph_type==2){
-                                    // l'identifiant est celui du canevas
-                                    var ctx = document.getElementById('graphique').getContext('2d');
-            // création du graphique
-            var myChart = new Chart(ctx, {
-            type: 'bar',   // le type du graphique
-            data: {        // les données
-                labels: ['Alex', 'Martine', 'Michel', 'Jules', 'Louise', 'Dominique'],
-                datasets: [{
-                            label: 'votes',
-                            data: [12, 19, 3, 5, 2, 3],
-                            backgroundColor: [ //couleur du fond des batonets
-                            'rgba(255, 99, 132, 0.2)',//red (red, green, blue, transparency)
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)', //les bords des batonets
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1, //épaiseur des bords
-                        }]
-                }
-                }
-            );
-        }
+<script>
+  //js code to initialize and create the default chart
+  var names = "{{keys}}";
+  var values = "{{values}}";
+
+  const myArray_names = names
+    .replace("dict_keys([", "")
+    .replace("])", "")
+    .split(",")
+    .reverse();
+  const myArray = values
+    .replace("dict_values([", "")
+    .replace("])", "")
+    .split(",")
+    .reverse();
+
+  // l'identifiant est celui du canevas
+  var ctx = document.getElementById("graphique").getContext("2d");
+  // création du graphique de base
+  var chart = new Chart(ctx, {
+    type: "bar", // le type du graphique
+    data: {
+      // les données
+      labels: myArray_names,
+      datasets: [
+        {
+          label: "Cows born over the decades",
+          data: myArray,
+          backgroundColor: [
+            //couleur du fond des batonets
+            "rgba(255, 99, 132, 0.2)", //red (red, green, blue, transparency)
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 1)", //les bords des batonets
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+          ],
+          borderWidth: 1, //épaiseur des bords
+        },
+      ],
+    },
+  });
+
+  function update() {
+    var chartSelector = document.getElementById("chart-select");
+    var selectedChart = chartSelector.value;
+    //chart_creation(selectedChart)
+    $(document).ready(function () {
+      $("#form").on("submit", function (e) {
+        $.ajax({
+          data: {
+            chartId: $("#chart-select").val(),
+            start_month: $("#month-select").val(),
+            start_year: $("#year-select").val(),
+            end_date:
+              $("#end-month-select").val() + "/" + $("#end-year-select").val(),
+            family_filter: $("#family-select").val(),
+            chartId: $("#chart-select").val(),
+            fullMoon: $("#fullmoon-select").val(),
+          },
+          type: "POST",
+          url: "/charts",
+        }).done(function (data) {
+          $("#output").text(data.keys, data.values);
+          try {
+            //Transformin jsonify dictionnary to array
+            var keys = data.keys
+              .replace("dict_keys([", "")
+              .replace("])", "")
+              .split(",")
+              .reverse();
+            //Transformin jsonify dictionnary to array
+            var values = data.values
+              .replace("dict_values([", "")
+              .replace("])", "")
+              .split(",")
+              .reverse();
+          } catch {
+            var keys = [data.keys];
+            var keys = [data.values];
+          }
+
+          chart_creation(selectedChart, keys, values);
+          $("#output").text(data.keys, data.values);
+          $("#output").text(data.error);
+        });
+        e.preventDefault();
+      });
+    });
+  }
+
+  function chart_creation(chart_type, keys, values) {
+    console.log(chart);
+    if (chart_type == 0) {
+      chart.type = "bar";
+      chart.data.labels = keys;
+      chart.data.datasets = [
+        {
+          label: "votes",
+          data: values,
+          backgroundColor: [
+            //couleur du fond des batonets
+            "rgba(255, 99, 132, 0.2)", //red (red, green, blue, transparency)
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 1)", //les bords des batonets
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+          ],
+          borderWidth: 1, //épaiseur des bords
+        },
+      ];
+      chart.update();
+    } else if (chart_type == 1) {
+      chart.type = "bar";
+      chart.data.labels = keys;
+      chart.data.datasets = [
+        {
+          label: "votes",
+          data: values,
+          backgroundColor: [
+            //couleur du fond des batonets
+            "rgba(255, 99, 132, 0.2)", //red (red, green, blue, transparency)
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 1)", //les bords des batonets
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+          ],
+          borderWidth: 1, //épaiseur des bords
+        },
+      ];
+      chart.update();
+    } else if (chart_type == 2) {
+      chart.type = "bar";
+      chart.data.labels = keys;
+      chart.data.datasets = [
+        {
+          label: "votes",
+          data: values,
+          backgroundColor: [
+            //couleur du fond des batonets
+            "rgba(255, 99, 132, 0.2)", //red (red, green, blue, transparency)
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 1)", //les bords des batonets
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)",
+          ],
+          borderWidth: 1, //épaiseur des bords
+        },
+      ];
+      chart.update();
+    } else if (chart_type == 3) {
+      chart.type = "bar";
+      chart.data.labels = keys;
+      chart.data.datasets = [
+        {
+          label: "votes",
+          data: values,
+          backgroundColor: [
+            //couleur du fond des batonets
+            "rgba(255, 99, 132, 0.2)", //red (red, green, blue, transparency)
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 1)", //les bords des batonets
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+          ],
+          borderWidth: 1, //épaiseur des bords
+        },
+      ];
+      chart.update();
     }
-    
-    function changeLanguage() {
-      location.hash = languageSwitcher.textContent;
-      location.reload();
+  }
+
+  function changeLanguage() {
+    location.hash = languageSwitcher.textContent;
+    location.reload();
+  }
+
+  //when chart-select is changed hide and show the wanted selects
+  $("#chart-select").on("change", function () {
+    var selectValue = $(this).val();
+
+    if (selectValue == 1) {
+      $("#month-select").show();
+      $("#end-month-select").show();
+      $("#year-select").show();
+      $("#end-year-select").show();
+      $("#family-select").show();
+      $("#fullmoon-select").hide();
+    } else if (selectValue == 2) {
+      $("#year-select").hide();
+      $("#month-select").show();
+      $("#month-select").on("change", function () {
+        var monthValue = $(this).val();
+        if (monthValue == 0) {
+          $("#year-select").show();
+        } else {
+          $("#year-select").hide();
+        }
+      });
+      $("#end-month-select").hide();
+      $("#end-year-select").hide();
+      $("#family-select").show();
+      $("#fullmoon-select").show();
+    } else if (selectValue == 3) {
+    } else {
+      $("#month-select").hide();
+      $("#end-month-select").hide();
+      $("#year-select").hide();
+      $("#end-year-select").hide();
+      $("#family-select").hide();
+      $("#fullmoon-select").hide();
     }
-  
-    // Define the language reload anchors
-    var language = {
-      fr: {
-        farm: "La Ferme", service:"Services", type:"Types d' animaux", graphic:"Graphiques", lang:"En", button:"Afficher", 
-        selection1:"Choisissez un graphique", selection2:"Choisissez une période", selection3:"Choix de la famille", 
-        theFarmText:"Notre ferme, la ferme des trois Chênes a fêté l'année passée son 150ème anniversaire. De génération en génération, elle est transmise et entretenue de père en fils et nous faisons tout notre possible pour répondre aux besoins des locaux.", 
-        servicesText:"Dans notre ferme, principalement laitière, nous proposons différents produits et services. Nous proposons du lait frais tous les matins mais également différentes sortes de fromages pour tous les goûts(sur demande). En été vous pouvez également acheter des oeufs du jour, venez tôt car le stock est limité. De plus nous proposons un service de livraison à domicile, n'hésitez pas à appeler le numéro qui se trouve dans la partie contact du site si vous voulez en bénéficier.", 
-        animalTypesText:"Dans notre modeste ferme on peut trouver trois races de vaches. Nous avons des Holstein, Jersey et des Blanc Bleu Belge. Grâce à une base de données que nous tenons à jour depuis les années 90, nous disposons d'une grande quantité d'informations sur toutes les vaches qui sont passées par cette ferme. Si ça vous intéresse vous pouvez retrouver sur ce site des graphiques interactifs reprenant ces données. Nous avons également un petit poulailler mais ce n'est pas notre élevage principal.", 
-        chartText:"Dans cette section il y a différents graphiques interactifs mettant en avant plusieurs catégories de données. N'hésitez pas à les consulter pour en apprendre plus sur notre ferme.", 
-        contactText:`Pour nous joindre :
+  });
+
+  $("#month-select").on("change", function () {
+    //Verify that the selected months are correct start date cant be older that end date
+    var monthSelector = document.getElementById("month-select").value;
+    var endMonthSelector = document.getElementById("end-month-select").value;
+    //year variables
+    var yearSelector = document.getElementById("year-select").value;
+    var endYearSelector = document.getElementById("end-year-select").value;
+
+    if (endYearSelector <= yearSelector) {
+      if (endMonthSelector <= monthSelector) {
+        document.querySelector("#month-select").value = endMonthSelector;
+      }
+      document.querySelector("#year-select").value = endYearSelector;
+    }
+  });
+  $("#end-month-select").on("change", function () {
+    //Verify that the selected months are correct start date cant be older that end date
+    var monthSelector = document.getElementById("month-select").value;
+    var endMonthSelector = document.getElementById("end-month-select").value;
+    //year variables
+    var yearSelector = document.getElementById("year-select").value;
+    var endYearSelector = document.getElementById("end-year-select").value;
+    if (endYearSelector <= yearSelector) {
+      if (endMonthSelector <= monthSelector) {
+        document.querySelector("#month-select").value = endMonthSelector;
+      }
+      document.querySelector("#year-select").value = endYearSelector;
+    }
+  });
+  $("#year-select").on("change", function () {
+    //Verify that the selected years are correct start date cant be older that end date
+    var monthSelector = document.getElementById("month-select").value;
+    var endMonthSelector = document.getElementById("end-month-select").value;
+    //year variables
+    var yearSelector = document.getElementById("year-select").value;
+    var endYearSelector = document.getElementById("end-year-select").value;
+    if (endYearSelector <= yearSelector) {
+      if (endMonthSelector <= monthSelector) {
+        document.querySelector("#month-select").value = endMonthSelector;
+      }
+      document.querySelector("#year-select").value = endYearSelector;
+    }
+  });
+  $("#end-year-select").on("change", function () {
+    //Verify that the selected months are correct start date cant be older that end date
+    var monthSelector = document.getElementById("month-select").value;
+    var endMonthSelector = document.getElementById("end-month-select").value;
+    //year variables
+    var yearSelector = document.getElementById("year-select").value;
+    var endYearSelector = document.getElementById("end-year-select").value;
+    if (endYearSelector <= yearSelector) {
+      if (endMonthSelector <= monthSelector) {
+        document.querySelector("#month-select").value = endMonthSelector;
+      }
+      document.querySelector("#year-select").value = endYearSelector;
+    }
+  });
+
+  // Define the language reload anchors
+  var language = {
+    fr: {
+      farm: "La Ferme",
+      service: "Services",
+      type: "Types d' animaux",
+      graphic: "Graphiques",
+      lang: "En",
+      button: "Afficher",
+      selection1: "Choisissez un graphique",
+      selection2: "Choisissez une période",
+      selection3: "Choix de la famille",
+      theFarmText:
+        "Notre ferme, la ferme des trois Chênes a fêté l'année passée son 150ème anniversaire. De génération en génération, elle est transmise et entretenue de père en fils et nous faisons tout notre possible pour répondre aux besoins des locaux.",
+      servicesText:
+        "Dans notre ferme, principalement laitière, nous proposons différents produits et services. Nous proposons du lait frais tous les matins mais également différentes sortes de fromages pour tous les goûts(sur demande). En été vous pouvez également acheter des oeufs du jour, venez tôt car le stock est limité. De plus nous proposons un service de livraison à domicile, n'hésitez pas à appeler le numéro qui se trouve dans la partie contact du site si vous voulez en bénéficier.",
+      animalTypesText:
+        "Dans notre modeste ferme on peut trouver trois races de vaches. Nous avons des Holstein, Jersey et des Blanc Bleu Belge. Grâce à une base de données que nous tenons à jour depuis les années 90, nous disposons d'une grande quantité d'informations sur toutes les vaches qui sont passées par cette ferme. Si ça vous intéresse vous pouvez retrouver sur ce site des graphiques interactifs reprenant ces données. Nous avons également un petit poulailler mais ce n'est pas notre élevage principal.",
+      chartText:
+        "Dans cette section il y a différents graphiques interactifs mettant en avant plusieurs catégories de données. N'hésitez pas à les consulter pour en apprendre plus sur notre ferme.",
+      contactText: `Pour nous joindre :
         \n- tel 0356/55 12 25
         \n- email : ferme3chenes@cows.be 
         \nNous ferons de notre mieux pour vous répondre au plus vite.`,
-        farmtit:"La Ferme", animaltypestit:"Types d' animaux", charttitletit:"Graphiques"
-      }
-    };
-  
-    // Check if a hash value exists in the URL
-    if (window.location.hash) {
-  
-      // Set the content of the webpage 
-      // depending on the hash values
-      if (window.location.hash == "#Fr") {
-          farmtitle.textContent = language.fr.farmtit;
-          animaltypestitle.textContent = language.fr.animaltypestit;
-          charttitle.textContent = language.fr.charttitletit;
+      farmtit: "La Ferme",
+      animaltypestit: "Types d' animaux",
+      charttitletit: "Graphiques",
+    },
+  };
 
-          thefarmlabel.textContent = language.fr.theFarmText;
-          serviceslabel.textContent = language.fr.servicesText;
-          animaltypeslabel.textContent = language.fr.animalTypesText;
-          chartslabel.textContent = language.fr.chartText; //continuer à changer les noms
-          contactlabel.textContent = language.fr.contactText;
-          bouton.textContent = language.fr.button;
-          select1.textContent = language.fr.selection1;
-          select2.textContent = language.fr.selection2;
-          select3.textContent = language.fr.selection3;
-          theFarm.textContent = language.fr.farm;
-          services.textContent = language.fr.service;
-          types.textContent = language.fr.type;
-          charts.textContent = language.fr.graphic;
-          languageSwitcher.textContent = language.fr.lang;
-      }
+  // Check if a hash value exists in the URL
+  if (window.location.hash) {
+    // Set the content of the webpage
+    // depending on the hash values
+    if (window.location.hash == "#Fr") {
+      theFarm.textContent = language.fr.farm;
+      services.textContent = language.fr.service;
+      types.textContent = language.fr.type;
+      charts.textContent = language.fr.graphic;
+      languageSwitcher.textContent = language.fr.lang;
+      farmtitle.textContent = language.fr.farmtit;
+      animaltypestitle.textContent = language.fr.animaltypestit;
+      charttitle.textContent = language.fr.charttitletit;
+      thefarmlabel.textContent = language.fr.theFarmText;
+      serviceslabel.textContent = language.fr.servicesText;
+      animaltypeslabel.textContent = language.fr.animalTypesText;
+      chartslabel.textContent = language.fr.chartText; //continuer à changer les noms
+      contactlabel.textContent = language.fr.contactText;
+      bouton.textContent = language.fr.button;
+      select1.textContent = language.fr.selection1;
+      select2.textContent = language.fr.selection2;
+      select3.textContent = language.fr.selection3;
     }
-  </script>
-{% endblock %}
+  }
+</script>
+
+{%block contact%}
+<head>
+  Contact
+</head>
+<p id="contactlabel">
+  To join us : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be We will try
+  our best to answer you as soon as possible.
+</p>
+{% endblock %} {% endblock %}
