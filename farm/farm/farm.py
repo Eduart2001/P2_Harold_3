@@ -16,7 +16,7 @@ def index():
     values = database.graph0().values()
     min = database.get_min_year()
     max = database.get_max_year()
-    return render_template("index.html", familles=database.get_from_db("nom", "familles"), keys=keys, values=values, min=min, max=max)
+    return render_template("index.html", familles=database.get_from_db("nom", "familles"),types=database.get_from_db("type", "types"),keys=keys, values=values, min=min, max=max)
 
 
 @app.route('/charts', methods=['GET', 'POST'])
