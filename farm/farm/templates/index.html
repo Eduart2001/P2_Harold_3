@@ -147,7 +147,16 @@
       <option value="both">both</option>
     </select>
   </div>
+    <select hidden class="select" name="race" id="race-select">
+      <option id="select8" value="">Choose an option</option>
+      {% for type in types%}
+      <option value="{{famille}}">{{type}}</option>
+      {%endfor%}
+    </select>
+	<label hidden for="percentage" id="labelp">Percentage of the race:</label>
 
+<input hidden type="number" id="percentage" name="genetics"
+       min="1" max="100"> 
   <div class="center-button">
     <button id="bouton" class="button button1" onclick="update()">Show</button
     ><!--Bouton pour montrer le graphique-->
@@ -387,6 +396,9 @@
       $("#end-year-select").show();
       $("#family-select").show();
       $("#fullmoon-select").hide();
+	  $("#race-select").hide();
+	  $("#percentage").hide();
+	  $("#labelp").hide();
     } else if (selectValue == 2) {
       $("#year-select").hide();
       $("#month-select").show();
@@ -402,14 +414,29 @@
       $("#end-year-select").hide();
       $("#family-select").show();
       $("#fullmoon-select").show();
+	  $("#race-select").hide();
+	  $("#percentage").hide();
+	  $("#labelp").hide();
     } else if (selectValue == 3) {
+	  $("#race-select").show();
+	  $("#percentage").show();
+	  $("#labelp").show();
+	  $("#month-select").hide();
+      $("#end-month-select").hide();
+      $("#year-select").hide();
+      $("#end-year-select").hide();
+      $("#family-select").hide();
+      $("#fullmoon-select").hide();
     } else {
       $("#month-select").hide();
       $("#end-month-select").hide();
       $("#year-select").hide();
       $("#end-year-select").hide();
       $("#family-select").hide();
-      $("#fullmoon-select").hide();
+      $("#fullmoon-select").hide();µ
+	  $("#race-select").hide();
+	  $("#percentage").hide();
+	  $("#labelp").hide();
     }
   });
 
