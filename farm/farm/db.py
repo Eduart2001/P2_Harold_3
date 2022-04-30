@@ -168,20 +168,80 @@ def getid(race):
         if a[i] == race:
             return b[i]
         
-def getnumber(race,percentage):
+def getidpercentage(race):
     """
     pre: a race name in str and a percentage (int)
-    post: the number of animals with the same race id and a percentage >= to the
-    percentage in argument
+    post: a list of every animals with the race and the percentage in a list
     """
     id = getid(race)
     idlist = get_from_db_sort("type_id","animaux_types")
+    animalidlist = get_from_db_sort("animal_id","animaux_types")
     percentagelist = get_from_db_sort("pourcentage","animaux_types")
-    count = 0
+    count = []
     for i in range(len(idlist)):
         if idlist[i] == id:
-            if percentagelist[i] >= percentage:
-                count+=1
+            count.append([animalidlist[i],percentagelist[i]])
+    return count
+
+def getnumber(race,percentage):
+    """
+    pre: a race name in str and a percentage (int)
+    post: the number of velage with the race and a percentage
+    higher or equals to the percentage un argument
+    """
+    parentlist = getidpercentage(race)
+    motherlist = get_from_db_sort("mere_id","velages")
+    fatherlist = get_from_db_sort("pere_id","velages")
+    idlist = get_from_db_sort("id","velages")
+    matchingmotherlist = []
+    matchingfatherlist = []
+    count = 0
+    for i in range (len(parentlist)):
+        idA = parentlist[i][0]
+        for r in range (len(motherlist)):
+            idB = motherlist[r]
+            if idA == idB:
+                idC = idlist[r]
+                matchingmotherlist.append([idB,idC,parentlist[i][1]])
+    for i in range (len(parentlist)):
+        idA = parentlist[i][0]
+        for r in range (len(fatherlist)):
+            idB = fatherlist[r]
+            if idA == idB:
+                idC = idlist[r]
+                matchingfatherlist.append([idB,idC,parentlist[i][1]])
+    for i in range (len(idlist)):
+        idA = idlist[i]
+        mother = False
+        father = False
+        for t in range (len(matchingmotherlist)):
+            idB = matchingmotherlist[t][1]
+            if idA == idB:
+                mother = True
+                motherpercent = matchingmotherlist[t][2]
+        for r in range (len(matchingfatherlist)):
+            idC = matchingfatherlist[r][1]
+            if idA == idC:
+                father = True
+                fatherpercent = matchingfatherlist[r][2]
+        if mother == True:
+            if father==True:
+                percent = (motherpercent + fatherpercent)/2
+                if percent >= percentage:
+                    count+=1
+            else:
+                percent = (motherpercent)/2
+                if percent >= percentage:
+                    count+=1
+        if father == True:
+            if mother==True:
+                percent = (motherpercent + fatherpercent)/2
+                if percent >= percentage:
+                    count+=1
+            else:
+                percent = (fatherpercent)/2
+                if percent >= percentage:
+                    count+=1
     return count
 def multiplerace(raceA,raceB,numberA,numberB):
     """
