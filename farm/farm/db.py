@@ -156,8 +156,46 @@ def get_max_year():
         return int(max_year)
     except:
         raise ValueError
+        
+def getid(race):
+    """
+    pre: a race name in str
+    post: the id of the race in the types table (int)
+    """
+    a = get_from_db_sort("type","types")
+    b = get_from_db_sort("id","types")
+    for i in range(len(b)):
+        if a[i] == race:
+            return b[i]
+        
+def getnumber(race,percentage):
+    """
+    pre: a race name in str and a percentage (int)
+    post: the number of animals with the same race id and a percentage >= to the
+    percentage in argument
+    """
+    id = getid(race)
+    idlist = get_from_db_sort("type_id","animaux_types")
+    percentagelist = get_from_db_sort("pourcentage","animaux_types")
+    count = 0
+    for i in range(len(idlist)):
+        if idlist[i] == id:
+            if percentagelist[i] >= percentage:
+                count+=1
+    return count
 
-
+def get_from_db_sort(name,table):
+    # Same as get_from_db but without l.sort() beacause the function also sort str
+    l=[]
+    try:
+        db=connect_db()
+        cursor=db.cursor()
+        for i in cursor.execute(f"SELECT {name}  from {table}"):
+            l.append(i[0])
+        return l
+    except:
+        raise ValueError()
+        
 def graph0():
     """graph0, is a function to show data about the flow of birth through decades.
        it uses 2 functions to get the max and min year in the db.
