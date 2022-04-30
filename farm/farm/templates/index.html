@@ -146,17 +146,14 @@
       <option value="other">other</option>
       <option value="both">both</option>
     </select>
-  </div>
-  <div class="charts-selector">
     <select hidden class="select" name="race" id="race-select">
       <option id="select8" value="">Choose an option</option>
       {% for type in types%}
-      <option value="{{famille}}">{{type}}</option>
+      <option value="{{type}}">{{type}}</option>
       {%endfor%}
     </select>
-<input hidden class="select" type="number" id="percentage" name="genetics"
-       min="1" max="100" placeholder="Percentage of the race">
-  </div>  
+    <input hidden class="select" type="number" id="percentage-input" name="genetics" min="1" max="100" placeholder="Percentage of the race">
+  </div> 
   <div class="center-button">
     <button id="bouton" class="button button1" onclick="update()">Show</button
     ><!--Bouton pour montrer le graphique-->
@@ -237,6 +234,8 @@
             family_filter: $("#family-select").val(),
             chartId: $("#chart-select").val(),
             fullMoon: $("#fullmoon-select").val(),
+            race:$("#race-select").val(),
+            percentage:$("#percentage-input").val()
           },
           type: "POST",
           url: "/charts",
@@ -397,7 +396,7 @@
       $("#family-select").show();
       $("#fullmoon-select").hide();
 	  $("#race-select").hide();
-	  $("#percentage").hide();
+	  $("#percentage-input").hide();
 	  $("#labelp").hide();
     } else if (selectValue == 2) {
       $("#year-select").hide();
@@ -415,11 +414,11 @@
       $("#family-select").show();
       $("#fullmoon-select").show();
 	  $("#race-select").hide();
-	  $("#percentage").hide();
+	  $("#percentage-input").hide();
 	  $("#labelp").hide();
     } else if (selectValue == 3) {
 	  $("#race-select").show();
-	  $("#percentage").show();
+	  $("#percentage-input").show();
 	  $("#labelp").show();
 	  $("#month-select").hide();
       $("#end-month-select").hide();
@@ -435,7 +434,7 @@
       $("#family-select").hide();
       $("#fullmoon-select").hide();µ
 	  $("#race-select").hide();
-	  $("#percentage").hide();
+	  $("#percentage-input").hide();
 	  $("#labelp").hide();
     }
   });

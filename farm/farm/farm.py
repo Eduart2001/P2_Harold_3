@@ -1,6 +1,5 @@
 import os
 import sqlite3
-from this import d
 from winreg import EnableReflectionKey
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, jsonify
 from . import db as database
@@ -29,6 +28,8 @@ def charts():
         end_date = request.form["end_date"]
         family_filter = request.form["family_filter"]
         fullmoon = request.form['fullMoon']
+        race=request.form["race"]
+        percentage=request.form["percentage"]
         if family_filter == "":
             family_filter = None
             
@@ -58,6 +59,9 @@ def charts():
                 return jsonify({"chartId": 2, "keys": str(keys), "values": str(values)})
             else:
                 return jsonify({'error': 'Missing data!'})
+        elif int(chartId)==3:
+            print(race,percentage)
+            return jsonify({'error': 'Missing data!'})
         else:
             return jsonify({'error': 'Missing data!'})
 
