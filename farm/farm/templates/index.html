@@ -147,13 +147,19 @@
       <option value="both">both</option>
     </select>
     <select hidden class="select" name="race" id="race-select">
-      <option id="select8" value="">Choose an option</option>
+      <option id="select8" value="">Choose a first race</option>
       {% for type in types%}
       <option value="{{type}}">{{type}}</option>
       {%endfor%}
     </select>
-    <input hidden class="select" type="number" id="percentage-input" name="genetics" min="1" max="100" placeholder="Percentage of the race">
-  </div> 
+    <input hidden class="select" type="number" id="percentage-input" name="genetics" min="1" max="100" placeholder="Percentage of the first race">
+     <select hidden class="select" name="raceB" id="race-selectB">
+      <option id="select9" value="">Choose a second race</option>
+      {% for type in types%}
+      <option value="{{type}}">{{type}}</option>
+      {%endfor%}
+    </select>
+    <input hidden class="select" type="number" id="percentage-inputB" name="geneticsB" min="1" max="100" placeholder="Percentage of the second race">
   <div class="center-button">
     <button id="bouton" class="button button1" onclick="update()">Show</button
     ><!--Bouton pour montrer le graphique-->
@@ -236,6 +242,8 @@
             fullMoon: $("#fullmoon-select").val(),
             race:$("#race-select").val(),
             percentage:$("#percentage-input").val()
+	    raceB:$("#race-selectB").val(),
+            percentageB:$("#percentage-inputB").val()
           },
           type: "POST",
           url: "/charts",
@@ -393,7 +401,8 @@
       $("#fullmoon-select").hide();
 	  $("#race-select").hide();
 	  $("#percentage-input").hide();
-	  $("#labelp").hide();
+	  $("#race-selectB").hide();
+	  $("#percentage-inputB").hide();
     } else if (selectValue == 2) {
       $("#year-select").hide();
       $("#month-select").show();
@@ -411,11 +420,14 @@
       $("#fullmoon-select").show();
 	  $("#race-select").hide();
 	  $("#percentage-input").hide();
+	  $("#race-selectB").hide();
+	  $("#percentage-inputB").hide();
 	  $("#labelp").hide();
     } else if (selectValue == 3) {
 	  $("#race-select").show();
 	  $("#percentage-input").show();
-	  $("#labelp").show();
+	  $("#race-selectB").show();
+	  $("#percentage-inputB").show();
 	  $("#month-select").hide();
       $("#end-month-select").hide();
       $("#year-select").hide();
@@ -431,7 +443,8 @@
       $("#fullmoon-select").hide();µ
 	  $("#race-select").hide();
 	  $("#percentage-input").hide();
-	  $("#labelp").hide();
+	  $("#race-selectB").hide();
+	  $("#percentage-inputB").hide();
     }
   });
 
