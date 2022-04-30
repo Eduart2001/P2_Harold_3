@@ -183,6 +183,15 @@ def getnumber(race,percentage):
             if percentagelist[i] >= percentage:
                 count+=1
     return count
+def multiplerace(raceA,raceB,numberA,numberB):
+    """
+    pre: 2 races (str) and 2 numbers (int)
+    post: a dictionnary with races for keys and numbers for value
+    """
+    d = {}
+    d[raceA]=numberA
+    d[raceB]=numberB
+    return d
 
 def get_from_db_sort(name,table):
     # Same as get_from_db but without l.sort() beacause the function also sort str
