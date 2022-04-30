@@ -154,9 +154,8 @@
       <option value="{{famille}}">{{type}}</option>
       {%endfor%}
     </select>
-	<label hidden for="percentage" id="labelp">Percentage of the race:</label>
-<input hidden type="number" id="percentage" name="genetics"
-       min="1" max="100">
+<input hidden class="select" type="number" id="percentage" name="genetics"
+       min="1" max="100" placeholder="Percentage of the race">
   </div>  
   <div class="center-button">
     <button id="bouton" class="button button1" onclick="update()">Show</button
