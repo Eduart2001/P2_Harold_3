@@ -258,14 +258,12 @@
             var keys = data.keys
               .replace("dict_keys([", "")
               .replace("])", "")
-              .split(",")
-              .reverse();
+              .split(",");
             //Transformin jsonify dictionnary to array
             var values = data.values
               .replace("dict_values([", "")
               .replace("])", "")
-              .split(",")
-              .reverse();
+              .split(",");
 
             chart_creation(selectedChart, keys, values);
           } catch {
@@ -292,7 +290,14 @@
     $("#"+name).css(css_error)
   }
   function chart_creation(chart_type, keys, values) {
-    console.log(chart);
+    var Col_array=[]
+    for(var x in keys){
+      var r = () => Math.random() * 256 >> 0;
+      var color = `rgb(${r()}, ${r()}, ${r()}, 0.5)` 
+      Col_array.push(color)
+    }
+
+
     if (chart_type == 0) {
       chart.type = "bar";
       chart.data.labels = keys;
@@ -328,23 +333,8 @@
         {
           label: "votes",
           data: values,
-          backgroundColor: [
-            //couleur du fond des batonets
-            "rgba(255, 99, 132, 0.2)", //red (red, green, blue, transparency)
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(255, 159, 64, 0.2)",
-          ],
-          borderColor: [
-            "rgba(255, 99, 132, 1)", //les bords des batonets
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)",
-          ],
+          backgroundColor: Col_array,
+          borderColor: Col_array,
           borderWidth: 1, //épaiseur des bords
         },
       ];
@@ -356,23 +346,8 @@
         {
           label: "votes",
           data: values,
-          backgroundColor: [
-            //couleur du fond des batonets
-            "rgba(255, 99, 132, 0.2)", //red (red, green, blue, transparency)
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(255, 159, 64, 0.2)",
-          ],
-          borderColor: [
-            "rgba(255, 99, 132, 1)", //les bords des batonets
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)",
-          ],
+          backgroundColor:Col_array,
+          borderColor: Col_array,
           borderWidth: 1, //épaiseur des bords
         },
       ];
@@ -384,24 +359,14 @@
         {
           label: "votes",
           data: values,
-          backgroundColor: [
-            //couleur du fond des batonets
-            "rgba(255, 99, 132, 0.2)", //red (red, green, blue, transparency)
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-          ],
-          borderColor: [
-            "rgba(255, 99, 132, 1)", //les bords des batonets
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-          ],
+          backgroundColor: Col_array,
+          borderColor: Col_array,
           borderWidth: 1, //épaiseur des bords
         },
       ];
       chart.update();
     }
   }
-
   function changeLanguage() {
     location.hash = languageSwitcher.textContent;
     location.reload();
