@@ -60,8 +60,8 @@ def charts():
             else:
                 return jsonify({'error': 'Missing data!'})
         elif int(chartId)==3:
-            print(race,percentage)
-            return jsonify({'error': 'Missing data!'})
+            number = database.getnumber(race,int(percentage))
+            return jsonify({"chartId": 3, "keys": str(race), "values": str(number)})
         else:
             return jsonify({'error': 'Missing data!'})
 
