@@ -1,6 +1,6 @@
 import os
 import sqlite3
-from this import d
+
 from winreg import EnableReflectionKey
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash, jsonify
 from . import db as database
