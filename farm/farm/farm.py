@@ -30,6 +30,8 @@ def charts():
         fullmoon = request.form['fullMoon']
         race=request.form["race"]
         percentage=request.form["percentage"]
+        raceB=request.form["raceB"]
+        percentageB=request.form["percentageB"]
         if family_filter == "":
             family_filter = None
             
@@ -60,8 +62,10 @@ def charts():
             else:
                 return jsonify({'error': 'Missing data!'})
         elif int(chartId)==3:
-            number = database.getnumber(race,int(percentage))
-            return jsonify({"chartId": 3, "keys": str(race), "values": str(number)})
+            numberA = database.getnumber(race,int(percentage))
+            numberB = database.getnumber(raceB,int(percentageB))
+            dic = database.multiplerace(race,raceB,numberA,numberB)
+            return jsonify({"chartId": 3, "keys": str(dic.keys()), "values": str(dic.values())})
         else:
             return jsonify({'error': 'Missing data!'})
 
