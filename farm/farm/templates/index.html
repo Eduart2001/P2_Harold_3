@@ -159,7 +159,13 @@
 <div class="chart">
   <canvas id="graphique" width="800px" height="550px"></canvas>
 </div>
-
+<h1 class="titles">
+  Contact
+</h1>
+<p id="contactlabel">
+  To join us : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be We will try
+  our best to answer you as soon as possible.
+</p>
 <a id="bottom"></a>
 {%endblock%}
 
@@ -305,7 +311,7 @@
       chart.data.labels = keys;
       chart.data.datasets = [
         {
-          label: "votes",
+          label: "Cows born over the decades",
           data: values,
           backgroundColor: [
             //couleur du fond des batonets
@@ -333,7 +339,7 @@
       chart.data.labels = keys;
       chart.data.datasets = [
         {
-          label: "votes",
+          label: "Vêlages",
           data: values,
           backgroundColor: Col_array,
           borderColor: Col_array,
@@ -346,7 +352,7 @@
       chart.data.labels = keys;
       chart.data.datasets = [
         {
-          label: "votes",
+          label: "Animaux nés",
           data: values,
           backgroundColor:Col_array,
           borderColor: Col_array,
@@ -359,7 +365,7 @@
       chart.data.labels = keys;
       chart.data.datasets = [
         {
-          label: "votes",
+          label: "Vaches",
           data: values,
           backgroundColor: Col_array,
           borderColor: Col_array,
@@ -504,10 +510,7 @@
         "Dans notre modeste ferme on peut trouver trois races de vaches. Nous avons des Holstein, Jersey et des Blanc Bleu Belge. Grâce à une base de données que nous tenons à jour depuis les années 90, nous disposons d'une grande quantité d'informations sur toutes les vaches qui sont passées par cette ferme. Si ça vous intéresse vous pouvez retrouver sur ce site des graphiques interactifs reprenant ces données. Nous avons également un petit poulailler mais ce n'est pas notre élevage principal.",
       chartText:
         "Dans cette section il y a différents graphiques interactifs mettant en avant plusieurs catégories de données. N'hésitez pas à les consulter pour en apprendre plus sur notre ferme.",
-      contactText: `Pour nous joindre :
-        \n- tel 0356/55 12 25
-        \n- email : ferme3chenes@cows.be 
-        \nNous ferons de notre mieux pour vous répondre au plus vite.`,
+      contactText: "Pour nous joindre : - tel 0356/55 12 25 - email : ferme3chenes@cows.be Nous ferons de notre mieux pour vous répondre au plus vite.",
       farmtit: "La Ferme",
       animaltypestit: "Types d' animaux",
       charttitletit: "Graphiques",
@@ -540,12 +543,4 @@
   }
 </script>
 
-{%block contact%}
-<head>
-  Contact
-</head>
-<p id="contactlabel">
-  To join us : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be We will try
-  our best to answer you as soon as possible.
-</p>
-{% endblock %} {% endblock %}
+{% endblock %}
