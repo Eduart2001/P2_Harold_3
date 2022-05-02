@@ -18,7 +18,7 @@ create a virtual environment
 
     to install flask : 
 
-    pip install flask
+    py -m pip install flask
 
 :to setup the project:
 
@@ -36,7 +36,7 @@ then you will se a new folder farm.egg-info appearing
 
 :to launch the project :
 you have to install some packages
-    - pip install ephem
+    - py -m pip install ephem
 
 activate the venv if not activated
    
