@@ -119,9 +119,9 @@ def charts():
                 return jsonify({'error':"dict_values("+str(l)+")"})
             try:
                 if float(percentage)<0:
-                    chart3=database.graph3(int(race1),int(race2),int(race3),-float(percentage),True)
+                    chart3=database.graph3(int(race1),int(race2),int(race3),-float(percentage),False)
                 else:
-                    chart3=database.graph3(int(race1),int(race2),int(race3),float(percentage),False)
+                    chart3=database.graph3(int(race1),int(race2),int(race3),float(percentage),True)
                 keys=chart3.keys()
                 values=chart3.values()
                 return jsonify({"chartId": 3, "keys": str(keys), "values": str(values)})
