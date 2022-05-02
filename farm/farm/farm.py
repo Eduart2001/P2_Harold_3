@@ -11,6 +11,12 @@ app = database.get_App()
 
 @app.route('/')
 def index():
+    """When the application is launched this function is launched.
+       By default it shows the base chart that shows data from the database of all velages born through decades
+
+    Returns:
+        render_template : to index.html
+    """
     keys = database.graph0().keys()
     values = database.graph0().values()
     min = database.get_min_year()
@@ -106,5 +112,5 @@ def charts():
                 return jsonify({"chartId": 3, "keys": str(keys), "values": str(values)})
             except:
                 return jsonify({'error': 'Missing data!'})
-
-        return jsonify({'output': [str(), str()]})
+        else:
+            index()
