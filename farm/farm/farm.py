@@ -27,6 +27,21 @@ def index():
 
 @app.route('/charts', methods=['GET', 'POST'])
 def charts():
+    """charts function uses a post request to show data on our website, from this request we will have the necessary information 
+        to generate the different charts. First of all we ask if the methode from the request is POST (the POST request method requests 
+        that a web server accept the data enclosed in the body of the request message, most likely for storing it.
+        It is often used when uploading a file or when submitting a completed web form)
+        If it's the case we attribute to each attribute the correspponding data.
+            It checks the chartId and based on that it returns a jsonify dictionnary of the needed data to update the chart
+            when something is missing it returns a jsonify dictionnary with the error
+        if not than it redirects to the homepage by calling the index()
+
+    Raises:
+        ValueError: 
+
+    Returns:
+        dict: jsonify dict of the necessary data to generate the chart or error dict with the occurring errors
+    """
     if request.method == "POST":
         
         chartId = request.form["chartId"]

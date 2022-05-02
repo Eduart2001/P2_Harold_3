@@ -39,14 +39,7 @@
   </div>
 </header>
 {% endblock %} {% endblock %} {%block body%} {%block farmblock%}
-<div
-  style="
-    background-image: linear-gradient(
-      rgb(109, 199, 0, 1) 40%,
-      rgba(109, 199, 0, 0)
-    );
-  "
-  class="thefarm-block">
+<div  class="thefarm-block">
 
   <!--the Farm-block division helps to separate our work in smaller divisions, so it will be easier to implement or manipulate with CSS styles and it makes it easier
     to understand and visualize.
@@ -219,22 +212,27 @@
 <div class="chart">
   <canvas id="graphique" width="800px" height="550px"></canvas>
 </div>
-<div class="endpage">
-  <h1 class="titles">
-    Contact
-  </h1>
-  <p class = "paragraph" id="contactlabel">
-    To join us : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be We will try
-    our best to answer you as soon as possible.
-  </p>
-  <img src="/static/images/CowJoke.jpg" alt="Cow joke" width="500" height="500" style="  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  top:0px;">
-</div>
 {%endblock%}
+<footer>
+  <div class="contact">
+    <h1 class="titles" style=" color: rgba(255,255,255);">
+      Contact
+    </h1>
+    <p class = "" id="contactlabel" style= "color: rgba(255,255,255);   position: relative;
+    left: 130px;
+    margin-right: 20%;
+    font-size: 1.3vw;
+    font-family: 'Times New Roman', serif;">
+      To join us : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be We will try
+      our best to answer you as soon as possible.
+    </p>
+    <img src="/static/images/CowJoke.jpg" alt="Cow joke" width="300" height="300" style="  display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;">
 
+  </div>
+</footer>
 <script>
   //js code to initialize and create the default chart
   var names = "{{keys}}";
@@ -467,10 +465,11 @@
   //when chart-select is changed hide and show the wanted selects that are attributed to the specific chart
   $("#chart-select").on("change", function () {
     var selectValue = $(this).val();
-    var css_changes={ 
-      "border": "none",
-      "border-radius":" 0px",
-      "border-radius": "8px" }
+    var css_changes={
+      "border-radius": "8px", 
+      "padding": "10px", 
+      "border": "2px solid #4CAF50",
+    }
     if (selectValue == 1) {
       $("#start-month-select").show().css(css_changes);
       $("#end-month-select").show().css(css_changes);
@@ -525,10 +524,11 @@
     //year variables
     var yearSelector = document.getElementById("start-year-select").value;
     var endYearSelector = document.getElementById("end-year-select").value;
-    $("#start-month-select").css({ 
-      "border": "none",
-      "border-radius":" 0px",
-      "border-radius": "8px" });
+    $("#start-month-select").css({
+      "border-radius": "8px", 
+      "padding": "10px", 
+      "border": "2px solid #4CAF50",
+    });
     if (endYearSelector <= yearSelector) {
       if (endMonthSelector <= monthSelector) {
         document.querySelector("#start-month-select").value = endMonthSelector;
@@ -543,10 +543,11 @@
     //year variables
     var yearSelector = document.getElementById("start-year-select").value;
     var endYearSelector = document.getElementById("end-year-select").value;
-    $("#end-month-select").css({ 
-      "border": "none",
-      "border-radius":" 0px",
-      "border-radius": "8px" });
+    $("#end-month-select").css({
+      "border-radius": "8px", 
+      "padding": "10px", 
+      "border": "2px solid #4CAF50",
+    });
     if (endYearSelector <= yearSelector) {
       if (endMonthSelector <= monthSelector) {
         document.querySelector("#start-month-select").value = endMonthSelector;
@@ -561,10 +562,11 @@
     //year variables
     var yearSelector = document.getElementById("start-year-select").value;
     var endYearSelector = document.getElementById("end-year-select").value;
-    $("#start-year-select").css({ 
-      "border": "none",
-      "border-radius":" 0px",
-      "border-radius": "8px" });
+    $("#start-year-select").css({
+      "border-radius": "8px", 
+      "padding": "10px", 
+      "border": "2px solid #4CAF50",
+    });
     if (endYearSelector <= yearSelector) {
       if (endMonthSelector <= monthSelector) {
         document.querySelector("#start-month-select").value = endMonthSelector;
@@ -580,10 +582,11 @@
     var yearSelector = document.getElementById("start-year-select").value;
     var endYearSelector = document.getElementById("end-year-select").value;
     //removes the red border from the #end-year-select when clicked
-    $("#end-year-select").css({ 
-      "border": "none",
-      "border-radius":" 0px",
-      "border-radius": "8px" });
+    $("#end-year-select").css({
+      "border-radius": "8px", 
+      "padding": "10px", 
+      "border": "2px solid #4CAF50",
+    });
     if (endYearSelector <= yearSelector) {
       if (endMonthSelector <= monthSelector) {
         document.querySelector("#start-month-select").value = endMonthSelector;
@@ -593,62 +596,73 @@
   });
   $("#fullmoon-select").on("change", function () {
     //removes the red border from the #fullmoon-select when clicked
-    $("#fullmoon-select").css({ 
-      "border": "none",
-      "border-radius":" 0px",
-      "border-radius": "8px" });
+    $("#fullmoon-select").css({
+      "border-radius": "8px", 
+      "padding": "10px", 
+      "border": "2px solid #4CAF50",
+    });
   });
   $("#percentage-select").on("change", function () {
     //removes the red border from the #percentage-select when clicked
-    $("#percentage-select").css({ 
-      "border": "none",
-      "border-radius":" 0px",
-      "border-radius": "8px" });
+    $("#percentage-select").css({
+      "border-radius": "8px", 
+      "padding": "10px", 
+      "border": "2px solid #4CAF50",
+    });
   });
   $("#raceType1-select").on("change", function () {
     //removes the red border from all raceTypeX-select when the #raceType1-select clicked
-    $("#raceType1-select").css({ 
-      "border": "none",
-      "border-radius":" 0px",
-      "border-radius": "8px" });
-    $("#raceType2-select").css({ 
-      "border": "none",
-      "border-radius":" 0px",
-      "border-radius": "8px" });
-    $("#raceType3-select").css({ 
-      "border": "none",
-      "border-radius":" 0px",
-      "border-radius": "8px" });
+    $("#raceType1-select").css({
+      "border-radius": "8px", 
+      "padding": "10px", 
+      "border": "2px solid #4CAF50",
+    });
+    $("#raceType2-select").css({
+      "border-radius": "8px", 
+      "padding": "10px", 
+      "border": "2px solid #4CAF50",
+    });
+    $("#raceType3-select").css({
+      "border-radius": "8px", 
+      "padding": "10px", 
+      "border": "2px solid #4CAF50",
+    });
   });
   $("#raceType2-select").on("change", function () {
     //removes the red border from all raceTypeX-select when the #raceType2-select clicked
-    $("#raceType1-select").css({ 
-      "border": "none",
-      "border-radius":" 0px",
-      "border-radius": "8px" });
-    $("#raceType2-select").css({ 
-      "border": "none",
-      "border-radius":" 0px",
-      "border-radius": "8px" });
-    $("#raceType3-select").css({ 
-      "border": "none",
-      "border-radius":" 0px",
-      "border-radius": "8px" });
+    $("#raceType1-select").css({
+      "border-radius": "8px", 
+      "padding": "10px", 
+      "border": "2px solid #4CAF50",
+    });
+    $("#raceType2-select").css({
+      "border-radius": "8px", 
+      "padding": "10px", 
+      "border": "2px solid #4CAF50",
+    });
+    $("#raceType3-select").css({
+      "border-radius": "8px", 
+      "padding": "10px", 
+      "border": "2px solid #4CAF50",
+    });
   });
   $("#raceType3-select").on("change", function () {
     //removes the red border from all raceTypeX-select when the #raceType3-select clicked
-    $("#raceType1-select").css({ 
-      "border": "none",
-      "border-radius":" 0px",
-      "border-radius": "8px" });
-    $("#raceType2-select").css({ 
-      "border": "none",
-      "border-radius":" 0px",
-      "border-radius": "8px" });
-    $("#raceType3-select").css({ 
-      "border": "none",
-      "border-radius":" 0px",
-      "border-radius": "8px" });
+    $("#raceType1-select").css({
+      "border-radius": "8px", 
+      "padding": "10px", 
+      "border": "2px solid #4CAF50",
+    });
+    $("#raceType2-select").css({
+      "border-radius": "8px", 
+      "padding": "10px", 
+      "border": "2px solid #4CAF50",
+    });
+    $("#raceType3-select").css({
+      "border-radius": "8px", 
+      "padding": "10px", 
+      "border": "2px solid #4CAF50",
+    });
   });
   // Define the language reload anchors
   var language = {
@@ -689,7 +703,7 @@
       farmtit: "La Ferme",
       animaltypestit: "Types d' animaux",
       charttitletit: "Graphiques",
-      premierGraph: "Le premier graphique affiche le nombre de vêlages par jour sur une période. On donne l’option à l’utilisateur d’affiner sa recherche en utilisant le champ famille qui est optionnel.",
+      premierGraph: "Le premier  graphique affiche le nombre de vêlages par jour sur une période. On donne l’option à l’utilisateur d’affiner sa recherche en utilisant le champ famille qui est optionnel.",
       deuxiemeGraph: "Le deuxième affiche pour une année ou un mois, les animaux nés en période de pleine lune et ceux en nés en dehors. L’option est donnée à l’utilisateur d’affiner sa recherche en utilisant le champ famille qui est optionnel.",
       troisiemeGraph:"Le troisième et dernier graphique affiche la distribution des races dans la base de données. On demande en entrée plusieurs races ainsi que le pourcentage minimum de ces dernières et on affiche sur le graphe le nombre d’animaux respectant ces critères par race.",
       chartText2:"N'hésitez pas à les consulter pour en apprendre plus sur notre ferme.",
