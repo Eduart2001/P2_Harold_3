@@ -139,18 +139,18 @@
     </select>
     <select hidden class="select" name="month" id="end-month-select">
       <option id="select4" value="">Select Month</option>
-      <option id="01" value="01">January</option>
-      <option id="02" value="02">February</option>
-      <option id="03" value="03">March</option>
-      <option id="04" value="04">April</option>
-      <option id="05" value="05">May</option>
-      <option id="06" value="06">June</option>
-      <option id="07" value="07">July</option>
-      <option id="08" value="08">August</option>
-      <option id="09" value="09">September</option>
-      <option id="10" value="10">October</option>
-      <option id="11" value="11">November</option>
-      <option id="12" selected value="12">December</option>
+      <option id="select41" value="01">January</option>
+      <option id="select42" value="02">February</option>
+      <option id="select43" value="03">March</option>
+      <option id="select44" value="04">April</option>
+      <option id="select45" value="05">May</option>
+      <option id="select46" value="06">June</option>
+      <option id="select47" value="07">July</option>
+      <option id="select48" value="08">August</option>
+      <option id="select49" value="09">September</option>
+      <option id="select410" value="10">October</option>
+      <option id="select411" value="11">November</option>
+      <option id="select412" selected value="12">December</option>
     </select>
     <select hidden class="select" name="year" id="end-year-select">
       <option id="select5" value="">Select year</option>
@@ -191,9 +191,9 @@
     </select>
     <select hidden class="select" name="fullmoon" id="fullmoon-select">
       <option id="select7" value="-1">Choose an option</option>
-      <option value="fullmoon">full moon</option>
-      <option value="other">other</option>
-      <option value="both">both</option>
+      <option id = "select71" value="fullmoon">full moon</option>
+      <option id = "select72" value="other">other</option>
+      <option id = "select73" value="both">both</option>
     </select>
   </div>
 
@@ -209,18 +209,20 @@
 <div class="chart">
   <canvas id="graphique" width="800px" height="550px"></canvas>
 </div>
-<h1 class="titles">
-  Contact
-</h1>
-<p class = "paragraph" id="contactlabel">
-  To join us : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be We will try
-  our best to answer you as soon as possible.
-</p>
-<img src="/static/images/CowJoke.jpg" alt="Cow joke" width="600" height="600" style="  display: block;
-margin-left: auto;
-margin-right: auto;
-position: relative;
-top:100px;">
+<div class="endpage">
+  <h1 class="titles">
+    Contact
+  </h1>
+  <p class = "paragraph" id="contactlabel">
+    To join us : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be We will try
+    our best to answer you as soon as possible.
+  </p>
+  <img src="/static/images/CowJoke.jpg" alt="Cow joke" width="500" height="500" style="  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top:0px;">
+</div>
 {%endblock%}
 
 <script>
@@ -649,7 +651,7 @@ top:100px;">
       theFarmText:
         "Notre ferme, la ferme des trois Chênes a fêté l'année passée son 150ème anniversaire. De génération en génération, elle est transmise et entretenue de père en fils et nous faisons tout notre possible pour répondre aux besoins des locaux.",
       servicesText:
-        "Dans notre ferme, principalement laitière, nous proposons différents produits et services. Nous proposons du lait frais tous les matins mais également différentes sortes de fromages pour tous les goûts (sur demande). \r En été vous pouvez également acheter des oeufs du jour, venez tôt car le stock est limité. De plus nous proposons un service de livraison à domicile, n'hésitez pas à appeler le numéro qui se trouve dans la partie contact du site si vous voulez en bénéficier.",
+        "Dans notre ferme, principalement laitière, nous proposons différents produits et services. Nous proposons du lait frais tous les matins mais également différentes sortes de fromages pour tous les goûts (sur demande). \r\n En été vous pouvez également acheter des oeufs du jour, venez tôt car le stock est limité. De plus nous proposons un service de livraison à domicile, n'hésitez pas à appeler le numéro qui se trouve dans la partie contact du site si vous voulez en bénéficier.",
       animalTypesText:
         "Dans notre modeste ferme on peut trouver trois races de vaches. Nous avons des Holstein, Jersey et des Blanc Bleu Belge. Grâce à une base de données que nous tenons à jour depuis les années 90, nous disposons d'une grande quantité d'informations sur toutes les vaches qui sont passées par cette ferme. Si ça vous intéresse vous pouvez retrouver sur ce site des graphiques interactifs reprenant ces données. Nous avons également un petit poulailler mais ce n'est pas notre élevage principal.",
       chartText:
@@ -662,6 +664,12 @@ top:100px;">
       deuxiemeGraph: "Le deuxième affiche pour une année ou un mois, les animaux nés en période de pleine lune et ceux en nés en dehors. L’option est donnée à l’utilisateur d’affiner sa recherche en utilisant le champ famille qui est optionnel.",
       troisiemeGraph:"Le troisième et dernier graphique affiche la distribution des races dans la base de données. On demande en entrée plusieurs races ainsi que le pourcentage minimum de ces dernières et on affiche sur le graphe le nombre d’animaux respectant ces critères par race.",
       chartText2:"N'hésitez pas à les consulter pour en apprendre plus sur notre ferme.",
+      selection7:"Choisissez une option",
+      selection71:"Pleine lune",
+      selection72:"Autre",
+      selection73:"Tous les deux",
+      selection8910:"Choisissez la race à afficher",
+      selection11: "Choisissez le pourcentage à afficher",
     },
   };
 
@@ -681,7 +689,7 @@ top:100px;">
       thefarmlabel.textContent = language.fr.theFarmText;
       serviceslabel.textContent  = language.fr.servicesText;
       animaltypeslabel.textContent = language.fr.animalTypesText;
-      chartslabel.textContent = language.fr.chartText; //continuer à changer les noms
+      chartslabel.textContent = language.fr.chartText; 
       contactlabel.textContent = language.fr.contactText;
       bouton.textContent = language.fr.button;
       firstGraph.textContent = language.fr.premierGraph;
@@ -689,11 +697,11 @@ top:100px;">
       thirdGraph.textContent = language.fr.troisiemeGraph;
       chartslabel2.textContent = language.fr.chartText2;
       select1.textContent = language.fr.selection1;
-      select2.textContent = language.fr.selection2; //plus ou moins ici il y a un problème
+      select2.textContent = language.fr.selection2;
       select3.textContent = language.fr.selection3;
       select4.textContent = language.fr.selection4;
       select5.textContent = language.fr.selection5;
-      select6.textContent = languag.fr.selection6;
+      select6.textContent = language.fr.selection6;
       select21.textContent = language.fr.selectionMonth1;
       select22.textContent = language.fr.selectionMonth2;
       select23.textContent = language.fr.selectionMonth3;
@@ -706,6 +714,26 @@ top:100px;">
       select210.textContent = language.fr.selectionMonth10;
       select211.textContent = language.fr.selectionMonth11;
       select212.textContent = language.fr.selectionMonth12;
+      select41.textContent = language.fr.selectionMonth2;
+      select42.textContent = language.fr.selectionMonth2;
+      select43.textContent = language.fr.selectionMonth3;
+      select44.textContent = language.fr.selectionMonth4;
+      select45.textContent = language.fr.selectionMonth5;
+      select46.textContent = language.fr.selectionMonth6;
+      select47.textContent = language.fr.selectionMonth7;
+      select48.textContent = language.fr.selectionMonth8;
+      select49.textContent = language.fr.selectionMonth9;
+      select410.textContent = language.fr.selectionMonth10;
+      select411.textContent = language.fr.selectionMonth11;
+      select412.textContent = language.fr.selectionMonth12;
+      select7.textContent = language.fr.selection7;
+      select71.textContent = language.fr.selection71;
+      select72.textContent = language.fr.selection72;
+      select73.textContent = language.fr.selection73;
+      select8.textContent = language.fr.selection8910;
+      select9.textContent = language.fr.selection8910;
+      select10.textContent = language.fr.selection8910;
+      select11.textContent = language.fr.selection11;
     }
   }
 </script>

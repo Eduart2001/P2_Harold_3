@@ -142,3 +142,9 @@ header{
     font-family: 'Times New Roman', serif;
     color:darkslategray;
 }
+.endpage{
+    background: linear-gradient(
+        rgba(255, 255, 255, 0),
+        rgb(155, 250, 255) 50%
+      );
+}
