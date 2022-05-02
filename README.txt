@@ -6,7 +6,7 @@ create a virtual environment
 :on windows:
     -if on VScode open terminal CMD
         py -m pip install virtualenv
-        py -m install venv venv
+        py -m venv venv
 
         -to activate venv-
         
