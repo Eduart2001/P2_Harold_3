@@ -24,7 +24,12 @@ class TestDataBaseMethods(unittest.TestCase):
         self.assertEqual(db.graph2(2000, None, "Citron", "other"), d6)
 
     def test_graph3(self):
-        pass
+        d7 = {'Holstein': 0, 'Blanc Bleu Belge': 10}
+        d8 = {'Holstein': 155, 'Blanc Bleu Belge': 113, 'Jersey': 14}
+        d9 = {'Holstein': 4266}
+        self.assertEqual(db.graph3(1,2,None,25,True), d7)
+        self.assertEqual(db.graph3(1,2,3,50,True), d8)
+        self.assertEqual(db.graph3(1,None,None,100,False), d9)
 
 if __name__ == '__main__':
     unittest.main()
