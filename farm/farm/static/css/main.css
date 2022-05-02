@@ -4,6 +4,12 @@ body{
     margin:0;
     margin-top: 80px;
     font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(0, 128, 0,0.5);
+    background-image: linear-gradient(16deg, lightblue 50%, transparent 70%), linear-gradient(-58deg, rgb(50, 47, 47) 35%, transparent 30%);
 }
 html {
     scroll-behavior: smooth;
@@ -19,6 +25,7 @@ header{
     backdrop-filter: blur(32px);
 
 }
+
 .container{
     max-width: 90%;
     margin:0px;
@@ -79,6 +86,11 @@ header{
     padding: 10px; 
     background-color:paleturquoise; 
     border:none;
+
+    border-radius: 8px; 
+    padding: 10px; 
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
 }
 
 .charts-selector{
@@ -89,6 +101,7 @@ header{
     padding-top: 32px;
     justify-content: center;
     gap: 10px 20px;
+
 }
 .charts-selector-filter{
     
@@ -109,6 +122,11 @@ header{
     margin: auto;
     justify-content: space-around;
 
+
+    border-radius: 8px; 
+    padding: 10px; 
+    background-color:rgb(240, 248, 255,0.8); 
+    border: 2px solid #4CAF50;
 }
 .paragraph{
     position: relative;
@@ -117,6 +135,13 @@ header{
     font-size: 1.3vw;
     font-family: 'Times New Roman', serif;
     color:darkslategray;
+
+    border-radius: 8px; 
+    padding: 10px; 
+    background-color:rgb(240, 248, 255,0.8); 
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+
 }
 .titles{
     position: relative;
@@ -141,4 +166,13 @@ header{
     font-size: 1.3vw;
     font-family: 'Times New Roman', serif;
     color:darkslategray;
+
+    border-radius: 8px; 
+    padding: 10px; 
+    background-color:rgb(240, 248, 255,0.8); 
+    border: 2px solid #4CAF50;
+    border-radius: 8px;
+}
+.contact{
+    background-color:rgb(0, 0,0,0.8); 
 }
