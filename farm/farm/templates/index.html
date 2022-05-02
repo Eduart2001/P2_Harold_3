@@ -132,6 +132,29 @@
       <option selected value="{{i}}">{{i}}</option>
       {%endfor%}
     </select>
+    <select hidden class="select" name="race" id="raceType1-select">
+      <option id="select8" value="-1">Select the race to display</option>
+      <option value="1">Holstein</option>
+    </select>
+    <select hidden class="select" name="race" id="raceType2-select">
+      <option id="select9" value="-1">Select the race to display</option>
+      <option value="2">Blanc Bleu Belge</option>
+    </select>
+    <select hidden class="select" name="race" id="raceType3-select">
+      <option id="select10" value="-1">Select the race to display</option>
+      <option value="3">Jersey</option>
+    </select>
+    <select hidden class="select" name="percentage" id="percentage-select">>
+      <option selected id="select11" value="">Select percentage to display</option>
+      <option value="-12.5"> ≤12.5 </option>
+      <option value="12.5"> 12.5  </option>
+      <option value="-25"> ≤25  </option>
+      <option value="25"> 25  </option>
+      <option value="-50"> ≤50  </option>
+      <option value="50"> 50  </option>
+      <option value="-100"> ≤100  </option>
+      <option value="100"> 100  </option>
+    </select>
   </div>
   <div class="charts-selector-filter">
     <select hidden class="select" name="family" id="family-select">
@@ -256,6 +279,10 @@
             family_filter: $("#family-select").val(),
             chartId: $("#chart-select").val(),
             fullMoon: $("#fullmoon-select").val(),
+            raceType1:$("#raceType1-select").val(),
+            raceType2:$("#raceType2-select").val(),
+            raceType3:$("#raceType3-select").val(),
+            percentage:$("#percentage-select").val(),
           },
           type: "POST",
           url: "/charts",
@@ -278,6 +305,7 @@
             var values = data.error
               .replace("dict_values(", "")
               .replace(",)", "")
+              .replace(")", "")
               .split(",")
               .reverse();
             console.log(values)
@@ -394,6 +422,10 @@
       $("#end-year-select").show().css(css_changes);
       $("#family-select").show().css(css_changes);
       $("#fullmoon-select").hide().css(css_changes);
+      $("#raceType1-select").hide().css(css_changes);
+      $("#raceType2-select").hide().css(css_changes);
+      $("#raceType3-select").hide().css(css_changes);
+      $("#percentage-select").hide().css(css_changes);
     } else if (selectValue == 2) {
       $("#start-month-select").show().css(css_changes);
       $("#start-year-select").show().css(css_changes);
@@ -401,7 +433,21 @@
       $("#end-year-select").hide().css(css_changes);
       $("#family-select").show().css(css_changes);
       $("#fullmoon-select").show().css(css_changes);
+      $("#raceType1-select").hide().css(css_changes);
+      $("#raceType2-select").hide().css(css_changes);
+      $("#raceType3-select").hide().css(css_changes);
+      $("#percentage-select").hide().css(css_changes);
     } else if (selectValue == 3) {
+      $("#start-month-select").hide().css(css_changes);
+      $("#end-month-select").hide().css(css_changes);
+      $("#start-year-select").hide().css(css_changes);
+      $("#end-year-select").hide().css(css_changes);
+      $("#family-select").hide().css(css_changes);
+      $("#fullmoon-select").hide().css(css_changes);
+      $("#raceType1-select").show().css(css_changes);
+      $("#raceType2-select").show().css(css_changes);
+      $("#raceType3-select").show().css(css_changes);
+      $("#percentage-select").show().css(css_changes);
     } else {
       $("#start-month-select").hide().css(css_changes);
       $("#end-month-select").hide().css(css_changes);
@@ -409,6 +455,10 @@
       $("#end-year-select").hide().css(css_changes);
       $("#family-select").hide().css(css_changes);
       $("#fullmoon-select").hide().css(css_changes);
+      $("#raceType1-select").hide().css(css_changes);
+      $("#raceType2-select").hide().css(css_changes);
+      $("#raceType3-select").hide().css(css_changes);
+      $("#percentage-select").hide().css(css_changes);
     }
   });
 
@@ -486,6 +536,54 @@
   });
   $("#fullmoon-select").on("change", function () {
     $("#fullmoon-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+  });
+  $("#percentage-select").on("change", function () {
+    $("#percentage-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+  });
+  $("#raceType1-select").on("change", function () {
+    $("#raceType1-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+    $("#raceType2-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+    $("#raceType3-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+  });
+  $("#raceType2-select").on("change", function () {
+    $("#raceType1-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+    $("#raceType2-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+    $("#raceType3-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+  });
+  $("#raceType3-select").on("change", function () {
+    $("#raceType1-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+    $("#raceType2-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+    $("#raceType3-select").css({ 
       "border": "none",
       "border-radius":" 0px",
       "border-radius": "8px" });

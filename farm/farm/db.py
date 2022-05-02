@@ -65,13 +65,14 @@ def init_app(app):
     app.cli.add_command(init_db_command)
 
 
-
-
-
-
 '''-------------------------------------------------------------------------------------------------------------
    ----------------------------------GETTERS AND SETTERS FOR DATA IN DATABASE-----------------------------------
    -------------------------------------------------------------------------------------------------------------'''
+   
+   
+   
+   
+'''---------------------------------------------------GETTERS--------------------------------------------------'''
    
 import ephem
 #PyEphem provides an ephem Python package for performing high-precision astronomy computations
@@ -96,7 +97,6 @@ def get_moons_in_year(year):
     moons.sort(key=lambda x: x[1])
 
     return moons  
-
 def get_full_moon_in_month(year,month):
     """Returns a list of the full moon in a month. The list contains tuples
         of the form (DATE,'full')"""
@@ -160,6 +160,74 @@ def get_max_year():
         raise ValueError
 
 
+
+
+'''---------------------------------------------------SETTERS--------------------------------------------------'''
+
+def add_to_animaux_types():
+    """add_to_animaux_types a function that adds data to the data base, it uses the data already present to compare, with data from others
+    tables to determine the type and percentage of an animal. first it verifies if the animal id is not present, than verifies it its parents ids are in
+    the base list if its the case. It checks for their type if they are the same type the animal it self is 100% of that type, if not it takes 50% from the
+    father and 50% from the mother.
+    it executes the command to add to the data base
+
+    Raises:
+        ValueError: 
+    """
+    check=get_from_db("animal_id","animaux_types")
+    try:
+        db=connect_db()
+        cursor=db.cursor()
+        for i in cursor.execute("SELECT id from animaux"):
+            if i[0] not in check:
+                for j in cursor.execute(f"select mere_id,pere_id from velages where id =(Select velage_id from animaux_velages where animal_id ={i[0]})"):
+                    #mere
+                    mere_type=-1
+                    mere_pourcentage=-1
+                    if j[0] in check:
+                        for k in cursor.execute(f"select type_id,pourcentage from animaux_types where animal_id={j[0]}"):
+                            mere_type=k[0]
+                            mere_pourcentage=k[1]
+                            
+                    #pere
+                    pere_type=-1
+                    pere_pourcentage=-1
+                    if j[1] in check:
+                        for k in cursor.execute(f"select type_id,pourcentage from animaux_types where animal_id={j[1]}"):
+                            pere_type=k[0]
+                            pere_pourcentage=k[1]
+                            
+                    if pere_type==mere_type and pere_type!=-1 and i[0] not in check:
+                            cursor.execute('''INSERT INTO animaux_types (animal_id, type_id, pourcentage)
+                    VALUES (?, ?, ?)''',
+                   (i[0],pere_type,pere_pourcentage))
+                            db.commit()
+                    else:
+                        if pere_type !=-1:
+                            cursor.execute('''INSERT INTO animaux_types (animal_id, type_id, pourcentage)
+                    VALUES (?, ?, ?)''',
+                   (i[0],pere_type,pere_pourcentage/2))
+                            db.commit()
+                        if mere_type!=-1:
+                            cursor.execute('''INSERT INTO animaux_types (animal_id, type_id, pourcentage)
+                    VALUES (?, ?, ?)''',
+                   (i[0],mere_type,mere_pourcentage/2))
+                            db.commit()                  
+    except:
+        raise ValueError
+
+
+'''Cette boucle a été laisse tournée 5305 fois pour ajouter lesanimaux dans le tableau apres 4000 fois rien a ete ajouter '''
+'''!!!!                 !ATTENTION NE PAS ENLEVER LES COMMENTAIRES ET LANCER LE PROGRAMME!             !!!!'''
+# cnt=0
+# while True:
+#     add_to_animaux_types()
+#     print(cnt)
+#     cnt+=1
+
+
+
+'''---------------------------------------------------CHARTS---------------------------------------------------'''
 def graph0():
     """graph0, is a function to show data about the flow of birth through decades.
        it uses 2 functions to get the max and min year in the db.
@@ -242,7 +310,6 @@ def graph1(startDate,endDate,famille=None):
         return d
 #print(graph1("01/01/1990","12/1990"))
 #print(graph1("03/10/2000","11/2010","Bleuet"))#28
-
 def graph2(year=None,month=None,famille=None,fullmoon=None):
     """graph2 function helps to extract necessary data, it shows the number of born calvings on a full moon and
        the number of born calvings outside the full moon, through one specified periode
@@ -297,9 +364,46 @@ def graph2(year=None,month=None,famille=None,fullmoon=None):
         return dict
     except:
         raise ValueError
-    
-    
+ 
 #print(graph2(2000))
 #print(graph1("03/10/2000","19/11/2010"))
 #print(graph1("03/10/2000","19/11/2010","Bleuet"))#28
 #print(get_full_moon_in_month(2022,1))
+
+def graph3(type1,type2,type3,percentage,equal_percentage):
+    """graph0, is a function to show data about the flow of birth through decades.
+       it uses 2 functions to get the max and min year in the db.
+       than creates a dictionnary of decades.
+       
+    Raises:
+        ValueError: **
+
+    Returns:
+        dictionnary: dictionnary of born calvings through decades
+    """
+    try:
+        types_dict={1:"Holstein",2:"Blanc Bleu Belge",3:"Jersey"}
+        d={}  
+        d[type1]=0
+        d[type2]=0
+        d[type3]=0
+        db=connect_db()
+        cursor=db.cursor()
+        for i in cursor.execute("SELECT type_id,pourcentage from animaux_types"):
+            if equal_percentage:
+                if i[1]==percentage:
+                    if d.get(i[0],-1)!=-1:
+                        d[i[0]]+=1
+            else:
+                if i[1]<=percentage:
+                    if d.get(i[0],-1)!=-1:
+                        d[i[0]]+=1
+        temp_dict={}
+        for i in d.keys():
+            if types_dict.get(i,-1)!=-1:
+                temp_dict[types_dict[i]]=d[i]
+        return temp_dict
+    except:
+        raise ValueError()
+    
+#print(graph3(None,2,3,25,True)) #{1: 0, 2: 10, 3: 15} #25
