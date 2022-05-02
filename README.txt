@@ -1,3 +1,4 @@
+https://github.com/Eduart2001/P2_Harold_3
 :install flask:
 
 create a virtual environment
@@ -5,7 +6,7 @@ create a virtual environment
 :on windows:
     -if on VScode open terminal CMD
         py -m pip install virtualenv
-        py -3 -m install venv venv
+        py -m install venv venv
 
         -to activate venv-
         
@@ -46,4 +47,3 @@ follow it with
     set FLASK_APP=farm.farm
     set FLASK_ENV=development
     flask run
-
