@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {%block head%} {%block option_bar%}
 <!--creating an option bar to access easily the different,
     categories or services of the webpage-->
+<title>Ferme des 3 chênes</title>
 <header>
   <div class="container">
     <!--container(name) division helps to separate our work in smaller divisions, 
@@ -91,19 +92,19 @@
       <option value="3">Graph3</option>
     </select>
     <select hidden class="select" name="month" id="start-month-select">
-      <option id="select2" value="">--Select Month--</option>
-      <option selected value="01">Janaury</option>
-      <option value="02">February</option>
-      <option value="03">March</option>
-      <option value="04">April</option>
-      <option value="05">May</option>
-      <option value="06">June</option>
-      <option value="07">July</option>
-      <option value="08">August</option>
-      <option value="09">September</option>
-      <option value="10">October</option>
-      <option value="11">November</option>
-      <option value="12">December</option>
+      <option id="select2" value="">Select Month</option>
+      <option id="select21" selected value="01">January</option>
+      <option id="select22" value="02">February</option>
+      <option id="select23" value="03">March</option>
+      <option id="select24" value="04">April</option>
+      <option id="select25" value="05">May</option>
+      <option id="select26" value="06">June</option>
+      <option id="select27" value="07">July</option>
+      <option id="select28" value="08">August</option>
+      <option id="select29" value="09">September</option>
+      <option id="select210" value="10">October</option>
+      <option id="select211" value="11">November</option>
+      <option id="select212" value="12">December</option>
     </select>
     <select hidden class="select" name="year" id="start-year-select">
       <option id="select3" value="">Select year</option>
@@ -112,8 +113,8 @@
       {%endfor%}
     </select>
     <select hidden class="select" name="month" id="end-month-select">
-      <option id="select4" value="">--Select Month--</option>
-      <option id="01" value="01">Janaury</option>
+      <option id="select4" value="">Select Month</option>
+      <option id="01" value="01">January</option>
       <option id="02" value="02">February</option>
       <option id="03" value="03">March</option>
       <option id="04" value="04">April</option>
@@ -598,8 +599,23 @@
       lang: "En",
       button: "Afficher",
       selection1: "Choisissez un graphique",
-      selection2: "Choisissez une période",
-      selection3: "Choix de la famille",
+      selection2: "Choisissez un mois",
+      selection3: "Choisissez une année",
+      selection4: "Choisissez un mois",
+      selection5: "Choisissez une année",
+      selection6: "Choisissez une famille",
+      selectionMonth1: "Janvier",
+      selectionMonth2: "Février",
+      selectionMonth3: "Mars",
+      selectionMonth4: "Avril",
+      selectionMonth5: "Mai",
+      selectionMonth6: "Juin",
+      selectionMonth7: "Juillet",
+      selectionMonth8: "Août",
+      selectionMonth9: "Septembre",
+      selectionMonth10: "Octobre",
+      selectionMonth11: "Novembre",
+      selectionMonth12: "Décembre",
       theFarmText:
         "Notre ferme, la ferme des trois Chênes a fêté l'année passée son 150ème anniversaire. De génération en génération, elle est transmise et entretenue de père en fils et nous faisons tout notre possible pour répondre aux besoins des locaux.",
       servicesText:
@@ -637,6 +653,21 @@
       select1.textContent = language.fr.selection1;
       select2.textContent = language.fr.selection2;
       select3.textContent = language.fr.selection3;
+      select4.textContent = language.fr.selection4;
+      select5.textContent = language.fr.selection5;
+      select6.textContent = languag.fr.selection6;
+      select21.textContent = language.fr.selectionMonth1;
+      select22.textContent = language.fr.selectionMonth2;
+      select23.textContent = language.fr.selectionMonth3;
+      select24.textContent = language.fr.selectionMonth4;
+      select25.textContent = language.fr.selectionMonth5;
+      select26.textContent = language.fr.selectionMonth6;
+      select27.textContent = language.fr.selectionMonth7;
+      select28.textContent = language.fr.selectionMonth8;
+      select29.textContent = language.fr.selectionMonth9;
+      select210.textContent = language.fr.selectionMonth10;
+      select211.textContent = language.fr.selectionMonth11;
+      select212.textContent = language.fr.selectionMonth12;
     }
   }
 </script>
