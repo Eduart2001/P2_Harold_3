@@ -1,5 +1,5 @@
 import unittest
-import db
+from . import db as db
 
 class TestDataBaseMethods(unittest.TestCase):
     

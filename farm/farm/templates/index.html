@@ -42,12 +42,15 @@
 <div
   style="
     background-image: linear-gradient(
-      rgb(109, 199, 0, 1) 50%,
+      rgb(109, 199, 0, 1) 40%,
       rgba(109, 199, 0, 0)
     );
   "
-  class="thefarm-block"
->
+  class="thefarm-block">
+
+  <!--the Farm-block division helps to separate our work in smaller divisions, so it will be easier to implement or manipulate with CSS styles and it makes it easier
+    to understand and visualize.
+    It contains one image and 7 paragraphs to explain the content of the web site  -->
   <img src="static\images\home-image.jpg" class="farm-image" />
   <a id="first" style="position: relative; top: -25px"></a>
   <h1 id="farmtitle" class="titles">The Farm</h1>
@@ -109,8 +112,13 @@
 </div>
 {%endblock%} {%block charts%}
 <form id="form" method="POST">
+    <!--The <form> element is a container for different types of input elements, such as: text fields, checkboxes, radio buttons, submit buttons,.
+    On our case when the show button is clicked it gets the data from the <form> and sends it to the farm.py as a POST request.
+      it contains a lot of selectors that helps us to get data to generate the charts -->
   <div class="charts-selector">
-    <select class="select" name="graph-to-display" id="chart-select">
+    <!-- This div contains the necessary selectors for different charts they are all hidden except the chart-to-display, this selector contains the options
+         for the chart to show, after choosing one of 3, the other selectors that may be used to generate this chart are showed -->
+    <select class="select" name="chart-to-display" id="chart-select">
       <option id="select1" value="0">Choose a graph to show</option>
       <option value="1">Graph1</option>
       <option value="2">Graph2</option>
@@ -183,6 +191,8 @@
     </select>
   </div>
   <div class="charts-selector-filter">
+    <!-- This div contains the filter selectors for different charts they are all hidden except the chart-to-display,the selectors in this div, helps
+      to show specific data, they are hidden by default and than depending on the chart-to-display they show -->
     <select hidden class="select" name="family" id="family-select">
       <option id="select6" value="">Choose a family</option>
       {% for famille in familles%}
@@ -198,12 +208,12 @@
   </div>
 
   <div class="center-button">
+    <!-- This div contains the button Show, this button on click calls a function called update which takes data from the selectors and sends 
+        to farm.py, as a request and takes data back to the front-end to display it on the chart -->
     <button id="bouton" class="button button1" onclick="update()">Show</button
     ><!--Bouton pour montrer le graphique-->
   </div>
 </form>
-
-<h3 id="output"></h3>
 <!--<p id="demo"></p>-->
 <a id="fifth" style="position: relative; top: -70px"></a>
 <div class="chart">
@@ -229,12 +239,13 @@
   //js code to initialize and create the default chart
   var names = "{{keys}}";
   var values = "{{values}}";
-
+  //transforms the string given from the request in to a array
   const myArray_names = names
     .replace("dict_keys([", "")
     .replace("])", "")
     .split(",")
     .reverse();
+  //transforms the string given from the request in to a array
   const myArray = values
     .replace("dict_values([", "")
     .replace("])", "")
@@ -248,11 +259,11 @@
     type: "bar", // le type du graphique
     data: {
       // les données
-      labels: myArray_names,
+      labels: myArray_names,//attributes the myArray_names  data to the labels of the Chart
       datasets: [
         {
           label: "Cows born over the decades",
-          data: myArray,
+          data: myArray,//attributes the myArray  data to the data of the Chart
           backgroundColor: [
             //couleur du fond des batonets
             "rgba(255, 99, 132, 0.2)", //red (red, green, blue, transparency)
@@ -297,6 +308,13 @@
   });
 
   function update() {
+    /* the update function is the function that handles the requests from the web site to the database, and vice versa.
+      it uses ajax to collect data when the button Show is clicked, and stores it in the #form request data label when this request is 
+      done with success, it tries  to decompose the string sent from the db to the ajax form as dictionary  in two arrays keys and values,
+      after that it calls the chart_creation(id,keys,values) which updates the data of the chart on to the new ones.
+      if an error occurred during this request, like missing data to generate the chart, it decomposes the string error in to an array 
+      and for each element of the error array it makes their border red by calling the function missingData(element).
+    */
     var chartSelector = document.getElementById("chart-select");
     var selectedChart = chartSelector.value;
     //chart_creation(selectedChart)
@@ -353,12 +371,14 @@
     });
   }
   function missingData(name){
+    /* makes the border of the name element red */
     var css_error={ 
       "border": "2px solid red",
       "border-radius":" 8px"};   
     $("#"+name).css(css_error)
   }
   function chart_creation(chart_type, keys, values) {
+    //generates random colors for the chart bars
     var Col_array=[]
     for(var x in keys){
       var r = () => Math.random() * 256 >> 0;
@@ -366,7 +386,9 @@
       Col_array.push(color)
     }
 
-
+    /*
+    depending on the chart-to-display selection it updates the attributes of the chart created before
+    */
     if (chart_type == 0) {
       chart.type = "bar";
       chart.data.labels = keys;
@@ -437,11 +459,12 @@
     }
   }
   function changeLanguage() {
+    //change the text of the website based on a dictionary that contains their traduction
     location.hash = languageSwitcher.textContent;
     location.reload();
   }
 
-  //when chart-select is changed hide and show the wanted selects
+  //when chart-select is changed hide and show the wanted selects that are attributed to the specific chart
   $("#chart-select").on("change", function () {
     var selectValue = $(this).val();
     var css_changes={ 
@@ -494,7 +517,7 @@
       $("#percentage-select").hide().css(css_changes);
     }
   });
-
+  
   $("#start-month-select").on("change", function () {
     //Verify that the selected months are correct start date cant be older that end date
     var monthSelector = document.getElementById("start-month-select").value;
@@ -556,6 +579,7 @@
     //year variables
     var yearSelector = document.getElementById("start-year-select").value;
     var endYearSelector = document.getElementById("end-year-select").value;
+    //removes the red border from the #end-year-select when clicked
     $("#end-year-select").css({ 
       "border": "none",
       "border-radius":" 0px",
@@ -568,18 +592,21 @@
     }
   });
   $("#fullmoon-select").on("change", function () {
+    //removes the red border from the #fullmoon-select when clicked
     $("#fullmoon-select").css({ 
       "border": "none",
       "border-radius":" 0px",
       "border-radius": "8px" });
   });
   $("#percentage-select").on("change", function () {
+    //removes the red border from the #percentage-select when clicked
     $("#percentage-select").css({ 
       "border": "none",
       "border-radius":" 0px",
       "border-radius": "8px" });
   });
   $("#raceType1-select").on("change", function () {
+    //removes the red border from all raceTypeX-select when the #raceType1-select clicked
     $("#raceType1-select").css({ 
       "border": "none",
       "border-radius":" 0px",
@@ -594,6 +621,7 @@
       "border-radius": "8px" });
   });
   $("#raceType2-select").on("change", function () {
+    //removes the red border from all raceTypeX-select when the #raceType2-select clicked
     $("#raceType1-select").css({ 
       "border": "none",
       "border-radius":" 0px",
@@ -608,6 +636,7 @@
       "border-radius": "8px" });
   });
   $("#raceType3-select").on("change", function () {
+    //removes the red border from all raceTypeX-select when the #raceType3-select clicked
     $("#raceType1-select").css({ 
       "border": "none",
       "border-radius":" 0px",
