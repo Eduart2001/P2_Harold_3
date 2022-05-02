@@ -90,7 +90,7 @@
       <option value="2">Graph2</option>
       <option value="3">Graph3</option>
     </select>
-    <select hidden class="select" name="month" id="month-select">
+    <select hidden class="select" name="month" id="start-month-select">
       <option id="select2" value="">--Select Month--</option>
       <option selected value="01">Janaury</option>
       <option value="02">February</option>
@@ -105,7 +105,7 @@
       <option value="11">November</option>
       <option value="12">December</option>
     </select>
-    <select hidden class="select" name="year" id="year-select">
+    <select hidden class="select" name="year" id="start-year-select">
       <option id="select3" value="">Select year</option>
       {% for i in range(min,max+1)%}
       <option selected value="{{i}}">{{i}}</option>
@@ -132,6 +132,29 @@
       <option selected value="{{i}}">{{i}}</option>
       {%endfor%}
     </select>
+    <select hidden class="select" name="race" id="raceType1-select">
+      <option id="select8" value="-1">Select the race to display</option>
+      <option value="1">Holstein</option>
+    </select>
+    <select hidden class="select" name="race" id="raceType2-select">
+      <option id="select9" value="-1">Select the race to display</option>
+      <option value="2">Blanc Bleu Belge</option>
+    </select>
+    <select hidden class="select" name="race" id="raceType3-select">
+      <option id="select10" value="-1">Select the race to display</option>
+      <option value="3">Jersey</option>
+    </select>
+    <select hidden class="select" name="percentage" id="percentage-select">>
+      <option selected id="select11" value="">Select percentage to display</option>
+      <option value="-12.5"> ≤12.5 </option>
+      <option value="12.5"> 12.5  </option>
+      <option value="-25"> ≤25  </option>
+      <option value="25"> 25  </option>
+      <option value="-50"> ≤50  </option>
+      <option value="50"> 50  </option>
+      <option value="-100"> ≤100  </option>
+      <option value="100"> 100  </option>
+    </select>
   </div>
   <div class="charts-selector-filter">
     <select hidden class="select" name="family" id="family-select">
@@ -141,7 +164,7 @@
       {%endfor%}
     </select>
     <select hidden class="select" name="fullmoon" id="fullmoon-select">
-      <option id="select7" value="">Choose an option</option>
+      <option id="select7" value="-1">Choose an option</option>
       <option value="fullmoon">full moon</option>
       <option value="other">other</option>
       <option value="both">both</option>
@@ -159,6 +182,14 @@
 <div class="chart">
   <canvas id="graphique" width="800px" height="550px"></canvas>
 </div>
+<h1 class="titles">
+  Contact
+</h1>
+<p id="contactlabel">
+  To join us : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be We will try
+  our best to answer you as soon as possible.
+</p>
+<a id="bottom"></a>
 {%endblock%}
 
 <script>
@@ -210,6 +241,26 @@
         },
       ],
     },
+    options: {
+      responsive: true,
+      legend: {
+          display: false
+      },
+      title: {
+          display: false,
+          text: 'Chart.js bar Chart'
+      },
+      animation: {
+          animateScale: true
+      },
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero: true,
+              }
+          }]
+      }
+  }
   });
 
   function update() {
@@ -221,53 +272,74 @@
         $.ajax({
           data: {
             chartId: $("#chart-select").val(),
-            start_month: $("#month-select").val(),
-            start_year: $("#year-select").val(),
-            end_date:
-              $("#end-month-select").val() + "/" + $("#end-year-select").val(),
+            start_month: $("#start-month-select").val(),
+            start_year: $("#start-year-select").val(),
+            end_month:$("#end-month-select").val(),
+            end_year: $("#end-year-select").val(),
             family_filter: $("#family-select").val(),
             chartId: $("#chart-select").val(),
             fullMoon: $("#fullmoon-select").val(),
+            raceType1:$("#raceType1-select").val(),
+            raceType2:$("#raceType2-select").val(),
+            raceType3:$("#raceType3-select").val(),
+            percentage:$("#percentage-select").val(),
           },
           type: "POST",
           url: "/charts",
         }).done(function (data) {
-          $("#output").text(data.keys, data.values);
+
           try {
             //Transformin jsonify dictionnary to array
             var keys = data.keys
               .replace("dict_keys([", "")
               .replace("])", "")
-              .split(",")
-              .reverse();
+              .split(",");
             //Transformin jsonify dictionnary to array
             var values = data.values
               .replace("dict_values([", "")
               .replace("])", "")
+              .split(",");
+
+            chart_creation(selectedChart, keys, values);
+          } catch {
+            var values = data.error
+              .replace("dict_values(", "")
+              .replace(",)", "")
+              .replace(")", "")
               .split(",")
               .reverse();
-          } catch {
-            var keys = [data.keys];
-            var keys = [data.values];
+            console.log(values)
+            for(var x in values){
+              missingData(values[x])
+            }
+            console.log("ERROR")
           }
-
-          chart_creation(selectedChart, keys, values);
-          $("#output").text(data.keys, data.values);
-          $("#output").text(data.error);
         });
         e.preventDefault();
       });
     });
   }
-
+  function missingData(name){
+    var css_error={ 
+      "border": "2px solid red",
+      "border-radius":" 8px"};   
+    $("#"+name).css(css_error)
+  }
   function chart_creation(chart_type, keys, values) {
-    console.log(chart);
+    var Col_array=[]
+    for(var x in keys){
+      var r = () => Math.random() * 256 >> 0;
+      var color = `rgb(${r()}, ${r()}, ${r()}, 0.5)` 
+      Col_array.push(color)
+    }
+
+
     if (chart_type == 0) {
       chart.type = "bar";
       chart.data.labels = keys;
       chart.data.datasets = [
         {
-          label: "votes",
+          label: "Cows born over the decades",
           data: values,
           backgroundColor: [
             //couleur du fond des batonets
@@ -295,25 +367,10 @@
       chart.data.labels = keys;
       chart.data.datasets = [
         {
-          label: "votes",
+          label: "Vêlages",
           data: values,
-          backgroundColor: [
-            //couleur du fond des batonets
-            "rgba(255, 99, 132, 0.2)", //red (red, green, blue, transparency)
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(255, 159, 64, 0.2)",
-          ],
-          borderColor: [
-            "rgba(255, 99, 132, 1)", //les bords des batonets
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)",
-          ],
+          backgroundColor: Col_array,
+          borderColor: Col_array,
           borderWidth: 1, //épaiseur des bords
         },
       ];
@@ -323,25 +380,10 @@
       chart.data.labels = keys;
       chart.data.datasets = [
         {
-          label: "votes",
+          label: "Animaux nés",
           data: values,
-          backgroundColor: [
-            //couleur du fond des batonets
-            "rgba(255, 99, 132, 0.2)", //red (red, green, blue, transparency)
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(255, 159, 64, 0.2)",
-          ],
-          borderColor: [
-            "rgba(255, 99, 132, 1)", //les bords des batonets
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)",
-          ],
+          backgroundColor:Col_array,
+          borderColor: Col_array,
           borderWidth: 1, //épaiseur des bords
         },
       ];
@@ -351,26 +393,16 @@
       chart.data.labels = keys;
       chart.data.datasets = [
         {
-          label: "votes",
+          label: "Vaches",
           data: values,
-          backgroundColor: [
-            //couleur du fond des batonets
-            "rgba(255, 99, 132, 0.2)", //red (red, green, blue, transparency)
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-          ],
-          borderColor: [
-            "rgba(255, 99, 132, 1)", //les bords des batonets
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-          ],
+          backgroundColor: Col_array,
+          borderColor: Col_array,
           borderWidth: 1, //épaiseur des bords
         },
       ];
       chart.update();
     }
   }
-
   function changeLanguage() {
     location.hash = languageSwitcher.textContent;
     location.reload();
@@ -379,98 +411,183 @@
   //when chart-select is changed hide and show the wanted selects
   $("#chart-select").on("change", function () {
     var selectValue = $(this).val();
-
+    var css_changes={ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" }
     if (selectValue == 1) {
-      $("#month-select").show();
-      $("#end-month-select").show();
-      $("#year-select").show();
-      $("#end-year-select").show();
-      $("#family-select").show();
-      $("#fullmoon-select").hide();
+      $("#start-month-select").show().css(css_changes);
+      $("#end-month-select").show().css(css_changes);
+      $("#start-year-select").show().css(css_changes);
+      $("#end-year-select").show().css(css_changes);
+      $("#family-select").show().css(css_changes);
+      $("#fullmoon-select").hide().css(css_changes);
+      $("#raceType1-select").hide().css(css_changes);
+      $("#raceType2-select").hide().css(css_changes);
+      $("#raceType3-select").hide().css(css_changes);
+      $("#percentage-select").hide().css(css_changes);
     } else if (selectValue == 2) {
-      $("#year-select").hide();
-      $("#month-select").show();
-      $("#month-select").on("change", function () {
-        var monthValue = $(this).val();
-        if (monthValue == 0) {
-          $("#year-select").show();
-        } else {
-          $("#year-select").hide();
-        }
-      });
-      $("#end-month-select").hide();
-      $("#end-year-select").hide();
-      $("#family-select").show();
-      $("#fullmoon-select").show();
+      $("#start-month-select").show().css(css_changes);
+      $("#start-year-select").show().css(css_changes);
+      $("#end-month-select").hide().css(css_changes);
+      $("#end-year-select").hide().css(css_changes);
+      $("#family-select").show().css(css_changes);
+      $("#fullmoon-select").show().css(css_changes);
+      $("#raceType1-select").hide().css(css_changes);
+      $("#raceType2-select").hide().css(css_changes);
+      $("#raceType3-select").hide().css(css_changes);
+      $("#percentage-select").hide().css(css_changes);
     } else if (selectValue == 3) {
+      $("#start-month-select").hide().css(css_changes);
+      $("#end-month-select").hide().css(css_changes);
+      $("#start-year-select").hide().css(css_changes);
+      $("#end-year-select").hide().css(css_changes);
+      $("#family-select").hide().css(css_changes);
+      $("#fullmoon-select").hide().css(css_changes);
+      $("#raceType1-select").show().css(css_changes);
+      $("#raceType2-select").show().css(css_changes);
+      $("#raceType3-select").show().css(css_changes);
+      $("#percentage-select").show().css(css_changes);
     } else {
-      $("#month-select").hide();
-      $("#end-month-select").hide();
-      $("#year-select").hide();
-      $("#end-year-select").hide();
-      $("#family-select").hide();
-      $("#fullmoon-select").hide();
+      $("#start-month-select").hide().css(css_changes);
+      $("#end-month-select").hide().css(css_changes);
+      $("#start-year-select").hide().css(css_changes);
+      $("#end-year-select").hide().css(css_changes);
+      $("#family-select").hide().css(css_changes);
+      $("#fullmoon-select").hide().css(css_changes);
+      $("#raceType1-select").hide().css(css_changes);
+      $("#raceType2-select").hide().css(css_changes);
+      $("#raceType3-select").hide().css(css_changes);
+      $("#percentage-select").hide().css(css_changes);
     }
   });
 
-  $("#month-select").on("change", function () {
+  $("#start-month-select").on("change", function () {
     //Verify that the selected months are correct start date cant be older that end date
-    var monthSelector = document.getElementById("month-select").value;
+    var monthSelector = document.getElementById("start-month-select").value;
     var endMonthSelector = document.getElementById("end-month-select").value;
     //year variables
-    var yearSelector = document.getElementById("year-select").value;
+    var yearSelector = document.getElementById("start-year-select").value;
     var endYearSelector = document.getElementById("end-year-select").value;
-
+    $("#start-month-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
     if (endYearSelector <= yearSelector) {
       if (endMonthSelector <= monthSelector) {
-        document.querySelector("#month-select").value = endMonthSelector;
+        document.querySelector("#start-month-select").value = endMonthSelector;
       }
-      document.querySelector("#year-select").value = endYearSelector;
+      document.querySelector("#start-year-select").value = endYearSelector;
     }
   });
   $("#end-month-select").on("change", function () {
     //Verify that the selected months are correct start date cant be older that end date
-    var monthSelector = document.getElementById("month-select").value;
+    var monthSelector = document.getElementById("start-month-select").value;
     var endMonthSelector = document.getElementById("end-month-select").value;
     //year variables
-    var yearSelector = document.getElementById("year-select").value;
+    var yearSelector = document.getElementById("start-year-select").value;
     var endYearSelector = document.getElementById("end-year-select").value;
+    $("#end-month-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
     if (endYearSelector <= yearSelector) {
       if (endMonthSelector <= monthSelector) {
-        document.querySelector("#month-select").value = endMonthSelector;
+        document.querySelector("#start-month-select").value = endMonthSelector;
       }
-      document.querySelector("#year-select").value = endYearSelector;
+      document.querySelector("#start-year-select").value = endYearSelector;
     }
   });
-  $("#year-select").on("change", function () {
+  $("#start-year-select").on("change", function () {
     //Verify that the selected years are correct start date cant be older that end date
-    var monthSelector = document.getElementById("month-select").value;
+    var monthSelector = document.getElementById("start-month-select").value;
     var endMonthSelector = document.getElementById("end-month-select").value;
     //year variables
-    var yearSelector = document.getElementById("year-select").value;
+    var yearSelector = document.getElementById("start-year-select").value;
     var endYearSelector = document.getElementById("end-year-select").value;
+    $("#start-year-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
     if (endYearSelector <= yearSelector) {
       if (endMonthSelector <= monthSelector) {
-        document.querySelector("#month-select").value = endMonthSelector;
+        document.querySelector("#start-month-select").value = endMonthSelector;
       }
-      document.querySelector("#year-select").value = endYearSelector;
+      document.querySelector("#start-year-select").value = endYearSelector;
     }
   });
   $("#end-year-select").on("change", function () {
     //Verify that the selected months are correct start date cant be older that end date
-    var monthSelector = document.getElementById("month-select").value;
+    var monthSelector = document.getElementById("start-month-select").value;
     var endMonthSelector = document.getElementById("end-month-select").value;
     //year variables
-    var yearSelector = document.getElementById("year-select").value;
+    var yearSelector = document.getElementById("start-year-select").value;
     var endYearSelector = document.getElementById("end-year-select").value;
+    $("#end-year-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
     if (endYearSelector <= yearSelector) {
       if (endMonthSelector <= monthSelector) {
-        document.querySelector("#month-select").value = endMonthSelector;
+        document.querySelector("#start-month-select").value = endMonthSelector;
       }
-      document.querySelector("#year-select").value = endYearSelector;
+      document.querySelector("#start-year-select").value = endYearSelector;
     }
   });
-
+  $("#fullmoon-select").on("change", function () {
+    $("#fullmoon-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+  });
+  $("#percentage-select").on("change", function () {
+    $("#percentage-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+  });
+  $("#raceType1-select").on("change", function () {
+    $("#raceType1-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+    $("#raceType2-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+    $("#raceType3-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+  });
+  $("#raceType2-select").on("change", function () {
+    $("#raceType1-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+    $("#raceType2-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+    $("#raceType3-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+  });
+  $("#raceType3-select").on("change", function () {
+    $("#raceType1-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+    $("#raceType2-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+    $("#raceType3-select").css({ 
+      "border": "none",
+      "border-radius":" 0px",
+      "border-radius": "8px" });
+  });
   // Define the language reload anchors
   var language = {
     fr: {
@@ -491,10 +608,7 @@
         "Dans notre modeste ferme on peut trouver trois races de vaches. Nous avons des Holstein, Jersey et des Blanc Bleu Belge. Grâce à une base de données que nous tenons à jour depuis les années 90, nous disposons d'une grande quantité d'informations sur toutes les vaches qui sont passées par cette ferme. Si ça vous intéresse vous pouvez retrouver sur ce site des graphiques interactifs reprenant ces données. Nous avons également un petit poulailler mais ce n'est pas notre élevage principal.",
       chartText:
         "Dans cette section il y a différents graphiques interactifs mettant en avant plusieurs catégories de données. N'hésitez pas à les consulter pour en apprendre plus sur notre ferme.",
-      contactText: `Pour nous joindre :
-        \n- tel 0356/55 12 25
-        \n- email : ferme3chenes@cows.be 
-        \nNous ferons de notre mieux pour vous répondre au plus vite.`,
+      contactText: "Pour nous joindre : - tel 0356/55 12 25 - email : ferme3chenes@cows.be Nous ferons de notre mieux pour vous répondre au plus vite.",
       farmtit: "La Ferme",
       animaltypestit: "Types d' animaux",
       charttitletit: "Graphiques",
@@ -527,12 +641,4 @@
   }
 </script>
 
-{%block contact%}
-<head>
-  Contact
-</head>
-<p id="contactlabel">
-  To join us : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be We will try
-  our best to answer you as soon as possible.
-</p>
-{% endblock %} {% endblock %}
+{% endblock %}
