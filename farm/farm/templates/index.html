@@ -47,61 +47,81 @@
   <img src="static\images\home-image.jpg" class="farm-image" />
   <a id="first" style="position: relative; top: -25px"></a>
   <h1 id="farmtitle" class="titles">The Farm</h1>
-  <p class="paragraph" id="thefarmlabel">
-    Our farm, the farm of the three Oaks celebrated its 150th birthday last
-    year. It has since then been bequeathed from father to son across
-    generations and we do our best to satisfy the local community's needs.
-  </p>
+  <div class="farm-box">
+    <div class="image-box">
+      <img src="static\images\Artboard 2.png" width="400px" height="400px"\>
+    </div>
+    <div class="content-farm">
+      <p class="paragraph" id="thefarmlabel">
+        Our farm, the farm of the three Oaks celebrated its 150th birthday last
+        year. It has since then been bequeathed from father to son across
+        generations and we do our best to satisfy the local community's needs.
+      </p>
+    </div>
+  </div>
   <a id="second" style="position: relative; top: -75px"></a>
   <h1 id="servicestitle" class="titles">Services</h1>
   <a id="third" style="position: relative; top: 25px"></a>
-  <p class="paragraph" id="serviceslabel">
-    In our mostly dairy farm we offer different kinds of services and products.
-    We have fresh milk every morning and a whole lot of different cheese types
-    (on demand).<br>
-    During the summer we also have a daily stock of eggs, although
-    a relatively small amount, so come early to be sure to have some.<br>
-    In addition, we hold a delivery service, feel free to call, you can find our
-    phone number in the contact section of this website.
-  </p>
+  <div class="service-box">
+    <div class="content-service">
+      <p class="paragraph" id="serviceslabel">
+        In our mostly dairy farm we offer different kinds of services and products.
+        We have fresh milk every morning and a whole lot of different cheese types
+        (on demand).<br>
+        During the summer we also have a daily stock of eggs, although
+        a relatively small amount, so come early to be sure to have some.<br>
+        In addition, we hold a delivery service, feel free to call, you can find our
+        phone number in the contact section of this website.
+      </p>
+    </div>
+    <div class="image-box">
+      <img src="static\images\Artboard 1.png" width="400px" height="400px"\>
+    </div>
+  </div>
   <h1 id="animaltypestitle" class="titles">Animal Types</h1>
   <a id="fourth" style="position: relative; top: 25px"></a>
-  <p class="paragraph" id="animaltypeslabel">
-    In our cosy little farm you can find three different breeds of cows. We have
-    Holsteins, Jerseys and some Blanc Bleu Belge. <br>
-    Due to a database that we keep
-    up to date since the nineties, we have tons of information about any cow
-    that lived in this farm. <br>
-    If you are interessed in this, you can find
-    interactive graphs about all this data on this website. We also take care of
-    a small number of hen.
-  </p>
+  <div class="AnimalTypes-box">
+    <div class="image-box">
+      <img src="static\images\animal_type.png" width="400px" height="400px"\>
+    </div>
+    <div class="content-AnimalTypes">
+      <p class="paragraph" id="animaltypeslabel">
+        In our cosy little farm you can find three different breeds of cows. We have
+        Holsteins, Jerseys and some Blanc Bleu Belge. <br>
+        Due to a database that we keep
+        up to date since the nineties, we have tons of information about any cow
+        that lived in this farm. <br>
+        If you are interessed in this, you can find
+        interactive graphs about all this data on this website. We also take care of
+        a small number of hen.
+      </p>
+    </div>
+  </div>
   <h1 id="charttitle" class="titles">Charts</h1>
-  <p class="paragraph" id="chartslabel">
-    In this section you will find a few different graphs highlighting various
-    types of data. Our web page is dynamic and responsible for extracting relevant data from the database, 
-    calculating quantities relevant to the exploitation of the three oaks, and displaying the result by a graph.
-  </p>
-  <h2 class="count">
-    1. Graph1
-  </h2>
-  <p class="paragraph2" id="firstGraph">The first graphic displays the number of calvings per day over a period. 
-    It gives the user the option to refine their search by using the family field that is optional.</p>
-    <h2 class="count">
-      2. Graph2
-    </h2>
-    <p class="paragraph2" id="secondGraph">The second one displays for a year or a month, 
-      animals born in the period of full moon and those born outside. 
-      We give the user the option to refine their search by using the family field that is optional.</p>
-  <h2 class="count">
-      3. Graph3
-    </h2>
-    <p class="paragraph2" id="thirdGraph">The third and last graphic displays the breed distribution in the database. 
-      Several breeds are required as well as the minimum percentage of these and the number of animals 
-      meeting these criteria per breed is displayed on the graph.</p>
-    <br>
-  <p class="paragraph" id="chartslabel2">Feel free to play around with them if you want to learn more
-    about our farm.</p>
+  <div class="charts-box">
+    <div class="content-chart">
+        <p class="paragraph" id="chartslabel">
+          In this section you will find a few different graphs highlighting various
+          types of data. Our web page is dynamic and responsible for extracting relevant data from the database, 
+          calculating quantities relevant to the exploitation of the three oaks, and displaying the result by a graph.
+        </p>
+        <h2 class="count">1. Graph1</h2>
+        <p class="paragraph2" id="firstGraph">The first graphic displays the number of calvings per day over a period. 
+          It gives the user the option to refine their search by using the family field that is optional.</p>
+        <h2 class="count">2. Graph2</h2>
+          <p class="paragraph2" id="secondGraph">The second one displays for a year or a month, 
+            animals born in the period of full moon and those born outside. 
+            We give the user the option to refine their search by using the family field that is optional.</p>
+        <h2 class="count">3. Graph3</h2>
+          <p class="paragraph2" id="thirdGraph">The third and last graphic displays the breed distribution in the database. 
+            Several breeds are required as well as the minimum percentage of these and the number of animals 
+            meeting these criteria per breed is displayed on the graph.</p>
+        <br>
+        <p class="paragraph" id="chartslabel2">Feel free to play around with them if you want to learn more
+          about our farm.</p>
+    </div> 
+    <div class="image-box"><img src="static\images\statistics.png" display="flex" width="400px" height="400px"\></div>
+  </div> 
 </div>
 {%endblock%} {%block charts%}
 <form id="form" method="POST">
@@ -214,23 +234,23 @@
 </div>
 {%endblock%}
 <footer>
+  <h1 class="titles" style=" color: rgba(255,255,255);">
+    Contact
+  </h1>
   <div class="contact">
-    <h1 class="titles" style=" color: rgba(255,255,255);">
-      Contact
-    </h1>
-    <p class = "" id="contactlabel" style= "color: rgba(255,255,255);   position: relative;
-    left: 130px;
-    margin-right: 20%;
-    font-size: 1.3vw;
-    font-family: 'Times New Roman', serif;">
-      To join us : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be We will try
-      our best to answer you as soon as possible.
-    </p>
-    <img src="/static/images/CowJoke.jpg" alt="Cow joke" width="300" height="300" style="  display: block;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;">
-
+    <div class="contact-box">
+      <p class = "" id="contactlabel" style= "color: rgba(255,255,255);   position: relative;
+      left: 130px;
+      margin-right: 20%;
+      font-size: 1.3vw;
+      font-family: 'Times New Roman', serif;">
+        To join us : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be We will try
+        our best to answer you as soon as possible.
+      </p>
+    </div>
+    <div class="image-box">
+      <img src="/static/images/CowJoke.jpg" alt="Cow joke" width="300" height="300">
+    </div>
   </div>
 </footer>
 <script>

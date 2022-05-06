@@ -275,10 +275,18 @@ def graph1(startDate,endDate,famille=None):
     startDate=time.strptime(startDate, "%d/%m/%Y")
     endDate=time.strptime(last_day(endDate)+"/"+endDate, "%d/%m/%Y")
     def get_id_from_same_family(name):
+        """ returns the list of id's where the family name is {name} as given"""
         l=[]
         for i in cursor.execute(f"SELECT id from animaux where famille_id =(SELECT id from familles where nom like '{name}')"):
             l.append(i[0])
         return l
+    def get_id_velages(l):
+        """ returns the list of velages id's, if there is the same id multiple times it only keeps one"""
+        t=[]
+        for i in l:
+            for j in cursor.execute(f"SELECT velage_id from animaux_velages where animal_id={i}"):
+                t.append(j[0])
+        return [i for n, i in enumerate(t) if i not in t[:n]] 
     
     d={}
     try:
@@ -295,11 +303,12 @@ def graph1(startDate,endDate,famille=None):
                         d[i[0]]=1
         else:
             temp_list=get_id_from_same_family(famille)
-            for j in temp_list:
-                t=cursor.execute(f"SELECT date  from velages WHERE id = (SELECT velage_id FROM animaux_velages WHERE animal_id='{j}')")
+            temp_list=get_id_velages(temp_list)
+            for i in temp_list:
+                t=cursor.execute(f"SELECT date from velages WHERE id={i}")
                 for j in t:
                     temp=time.strptime(j[0], "%d/%m/%Y")
-                    if temp<=endDate and temp>=startDate :
+                    if temp<=endDate and temp>=startDate:
                         if d.get(j[0],-1)!=-1:
                             a=d[j[0]]+1
                             d[j[0]]=a
@@ -308,8 +317,6 @@ def graph1(startDate,endDate,famille=None):
         return d
     except:
         return d
-#print(graph1("01/01/1990","12/1990"))
-#print(graph1("03/10/2000","11/2010","Bleuet"))#28
 def graph2(year=None,month=None,famille=None,fullmoon=None):
     """graph2 function helps to extract necessary data, it shows the number of born calvings on a full moon and
        the number of born calvings outside the full moon, through one specified periode
