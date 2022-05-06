@@ -30,9 +30,7 @@
 
       <div class="language">
         <li>
-          <a onclick="changeLanguage()" class="nav-link" id="languageSwitcher"
-            >Fr</a
-          >
+          <a onclick="changeLanguage()" class="nav-link" id="languageSwitcher">Fr</a>
         </li>
       </div>
     </div>
@@ -59,9 +57,8 @@
       </p>
     </div>
   </div>
-  <a id="second" style="position: relative; top: -75px"></a>
+  <a id="second" style="position: relative; top: -65px"></a>
   <h1 id="servicestitle" class="titles">Services</h1>
-  <a id="third" style="position: relative; top: 25px"></a>
   <div class="service-box">
     <div class="content-service">
       <p class="paragraph" id="serviceslabel">
@@ -75,11 +72,11 @@
       </p>
     </div>
     <div class="image-box">
-      <img src="static\images\Artboard 1.png" width="400px" height="400px"\>
+      <img src="static\images\Artboard 1.png"\>
     </div>
   </div>
+  <a id="third" style="position: relative; top: -65px"></a>
   <h1 id="animaltypestitle" class="titles">Animal Types</h1>
-  <a id="fourth" style="position: relative; top: 25px"></a>
   <div class="AnimalTypes-box">
     <div class="image-box">
       <img src="static\images\animal_type.png" width="400px" height="400px"\>
@@ -97,6 +94,7 @@
       </p>
     </div>
   </div>
+  <a id="fourth" style="position: relative; top: -65px"></a>
   <h1 id="charttitle" class="titles">Charts</h1>
   <div class="charts-box">
     <div class="content-chart">
@@ -120,7 +118,7 @@
         <p class="paragraph" id="chartslabel2">Feel free to play around with them if you want to learn more
           about our farm.</p>
     </div> 
-    <div class="image-box"><img src="static\images\statistics.png" display="flex" width="400px" height="400px"\></div>
+    <div class="image-box"><img src="static\images\statistics.png" display="flex" width="300px" height="300px"\></div>
   </div> 
 </div>
 {%endblock%} {%block charts%}
@@ -228,7 +226,6 @@
   </div>
 </form>
 <!--<p id="demo"></p>-->
-<a id="fifth" style="position: relative; top: -50px"></a>
 <div class="chart">
   <canvas id="graphique" width="800px" height="550px"></canvas>
 </div>
@@ -247,13 +244,40 @@
         To join us : - tel 0356/55 12 25 - email : - ferme3chenes@cows.be We will try
         our best to answer you as soon as possible.
       </p>
+      <div class="tooltip"> 
+        <input class="tooltip" type="image" src="/static/images/phone.png" onclick="copyFunctionNumber()" onmouseout="outFunc()" width="100" height="100"/>
+        <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+      </div>
+      <div class="tooltip"> 
+        <input class="tooltip" type="image" src="/static/images/email.png" onclick="copyFunctionEmail()" onmouseout="outFunc()" width="100" height="100"/>
+        <span class="tooltiptext" id="myTooltip2">Copy to clipboard</span>
+      </div>
     </div>
     <div class="image-box">
       <img src="/static/images/CowJoke.jpg" alt="Cow joke" width="300" height="300">
     </div>
   </div>
+  <a id="fifth" style="position: relative"></a>
 </footer>
 <script>
+  function copyFunctionNumber() {
+  navigator.clipboard.writeText('0356/55 12 25');
+  
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Phone numer copied";
+}
+
+function copyFunctionEmail() {
+  navigator.clipboard.writeText('ferme3chenes@cows.be');
+  
+  var tooltip = document.getElementById("myTooltip2");
+  tooltip.innerHTML = "Email copied";
+}
+
+function outFunc() {
+  var tooltip = document.getElementById("myTooltip");
+  tooltip.innerHTML = "Copy to clipboard";
+}
   //js code to initialize and create the default chart
   var names = "{{keys}}";
   var values = "{{values}}";

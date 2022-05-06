@@ -173,6 +173,7 @@ footer{
     margin-right: 15px;
 }
 .farm-box{
+    margin-top: -4%;
     margin-left: 5%;
     align-content: center;
     display: flex;
@@ -183,13 +184,15 @@ footer{
 }
 .farm-box .content-farm{
     width: 70%;
+    height: fit-content;
+    margin: auto;
     background-color:rgb(240, 248, 255,0.4);  
     border: 2px solid #4CAF50;
     border-radius: 8px;
     display: flex;
 }
 .service-box{
-    margin-left: 5%;
+    margin-left: 2.5%;
     align-content: center;
     display: flex;
     justify-content: space-around;
@@ -199,6 +202,8 @@ footer{
 }
 .service-box .content-service{
     width: 70%;
+    height: fit-content;
+    margin: auto;
     background-color:rgb(240, 248, 255,0.4);  
     border: 2px solid #4CAF50;
     border-radius: 8px;
@@ -215,6 +220,8 @@ footer{
 }
 .AnimalTypes-box .content-AnimalTypes{
     width: 70%;
+    height: fit-content;
+    margin: auto;
     background-color:rgb(240, 248, 255,0.4);  
     border: 2px solid #4CAF50;
     border-radius: 8px;
@@ -232,12 +239,52 @@ footer{
 }
 .charts-box .content-chart{
     width: 70%;
+    height: fit-content;
+    margin: auto;
     background-color:rgb(240, 248, 255,0.4);  
     border: 2px solid #4CAF50;
     border-radius: 8px;
 }
 .service-box .image-box{
-    width: 400px;
-    height: 400px;
-
+    margin-right: 2.5%;
+    width: 300px;
+    height: 300px;
 }
+.tooltip {
+    position: relative;
+    margin-left: 20%;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
