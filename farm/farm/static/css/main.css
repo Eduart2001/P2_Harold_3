@@ -155,9 +155,9 @@ footer{
     font-family: 'Times New Roman', Times, serif;
 }
 .paragraph2{
-    position: relative;
-    left: 130px;
-    margin-right: 20%;
+    position: block;
+    width:70%;
+    margin-left: 10%;
     font-size: 1.3vw;
     font-family: 'Times New Roman', serif;
     color:darkslategray;
