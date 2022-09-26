@@ -105,10 +105,6 @@ def get_full_moon_in_month(year,month):
     localtime=ephem.localtime(date)
     
     return [(localtime.strftime("%d/%m/%Y"),'full')]
-
-#print(get_full_moon_in_month(2022,1))
-# print(get_moons_in_year(2022))
-
 def get_from_db(name,table):
     """Returns a list of str type elements depending of the name given in args, it searches data on the database,
     It selects all id's from the animaux table if name=id and table=animaux for example.
@@ -131,8 +127,6 @@ def get_from_db(name,table):
         return l
     except:
         raise ValueError()
-    
-
 def get_min_year():
     try:
         db=connect_db()
@@ -144,8 +138,7 @@ def get_min_year():
                 min_year=k[0]
         return int(min_year)
     except:
-        raise ValueError
-    
+        raise ValueError   
 def get_max_year():
     try:
         db=connect_db()
@@ -158,9 +151,6 @@ def get_max_year():
         return int(max_year)
     except:
         raise ValueError
-
-
-
 
 '''---------------------------------------------------SETTERS--------------------------------------------------'''
 
@@ -215,8 +205,6 @@ def add_to_animaux_types():
                             db.commit()                  
     except:
         raise ValueError
-
-
 '''Cette boucle a été laisse tournée 5305 fois pour ajouter lesanimaux dans le tableau apres 4000 fois rien a ete ajouter '''
 '''!!!!                 !ATTENTION NE PAS ENLEVER LES COMMENTAIRES ET LANCER LE PROGRAMME!             !!!!'''
 # cnt=0
@@ -224,9 +212,6 @@ def add_to_animaux_types():
 #     add_to_animaux_types()
 #     print(cnt)
 #     cnt+=1
-
-
-
 '''---------------------------------------------------CHARTS---------------------------------------------------'''
 def graph0():
     """graph0, is a function to show data about the flow of birth through decades.
@@ -259,7 +244,6 @@ def graph0():
         return d
     except:
         raise ValueError()
-
 def graph1(startDate,endDate,famille=None):
     """graph1 function helps to extract necessary data, it shows the number of born calvings through one specified periode
        the search could be specified to a single family, if none it will show all
@@ -371,12 +355,6 @@ def graph2(year=None,month=None,famille=None,fullmoon=None):
         return dict
     except:
         raise ValueError
- 
-#print(graph2(2000))
-#print(graph1("03/10/2000","19/11/2010"))
-#print(graph1("03/10/2000","19/11/2010","Bleuet"))#28
-#print(get_full_moon_in_month(2022,1))
-
 def graph3(type1,type2,type3,percentage,equal_percentage):
     """graph0, is a function to show data about the flow of birth through decades.
        it uses 2 functions to get the max and min year in the db.
@@ -413,4 +391,26 @@ def graph3(type1,type2,type3,percentage,equal_percentage):
     except:
         raise ValueError()
     
+
+ 
+#print(graph2(2000))
+#print(graph1("03/10/2000","19/11/2010"))
+#print(graph1("03/10/2000","19/11/2010","Bleuet"))#28
+#print(get_full_moon_in_month(2022,1))
 #print(graph3(None,2,3,25,True)) #{1: 0, 2: 10, 3: 15} #25
+
+
+def is_in_db(question_to_be_added):
+   s="Ctrl, Shift and Alt are called .......... keys."
+   try:
+       db=connect_db()
+       cursor=db.cursor()
+       t=cursor.execute(f"SELECT famille_id from animaux where sexe ={question_to_be_added}")
+       for i in t:
+           print(i)
+   except:
+       raise 
+
+#print(add_to_db_from_text_file("quiz/MCQ.txt"))
+
+print(is_in_db("M"))
