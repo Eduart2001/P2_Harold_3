@@ -413,4 +413,4 @@ def is_in_db(question_to_be_added):
 
 #print(add_to_db_from_text_file("quiz/MCQ.txt"))
 
-print(is_in_db("M"))
+# print(is_in_db("M"))
